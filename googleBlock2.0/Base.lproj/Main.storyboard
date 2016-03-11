@@ -38,9 +38,9 @@
                             <constraint firstItem="xIx-qE-IPu" firstAttribute="top" secondItem="0aI-aC-g0v" secondAttribute="bottom" id="4hj-Pc-Iue"/>
                             <constraint firstItem="0aI-aC-g0v" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="265" id="COW-BO-yl3"/>
                             <constraint firstItem="xIx-qE-IPu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Dr4-g6-xMt"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xIx-qE-IPu" secondAttribute="bottom" id="Ksp-CS-aLB"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xIx-qE-IPu" secondAttribute="bottom" id="Hru-sJ-gCR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xIx-qE-IPu" secondAttribute="bottom" id="KtE-DA-as7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xIx-qE-IPu" secondAttribute="trailing" constant="-20" id="LeI-Wi-CZc"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xIx-qE-IPu" secondAttribute="bottom" id="gVb-El-70Z"/>
                             <constraint firstItem="0aI-aC-g0v" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="gp4-sd-wfq"/>
                             <constraint firstItem="xIx-qE-IPu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="iXN-KH-Sln"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xIx-qE-IPu" secondAttribute="trailing" constant="-20" id="j2q-9E-MzW"/>
@@ -51,7 +51,6 @@
                                 <exclude reference="4hj-Pc-Iue"/>
                                 <exclude reference="Dr4-g6-xMt"/>
                                 <exclude reference="j2q-9E-MzW"/>
-                                <exclude reference="gVb-El-70Z"/>
                             </mask>
                         </variation>
                     </view>

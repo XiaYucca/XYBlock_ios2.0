@@ -46,11 +46,37 @@
     //   NSArray *path =[manager contentsOfDirectoryAtPath:contentPath error:nil];
     
     
-     NSLog(@"path ---%@\nhtmlString---%@",newPath,htmlString);
+  //   NSLog(@"path ---%@\nhtmlString---%@",newPath,htmlString);
     
     [self.webView loadHTMLString:htmlString baseURL:[NSURL URLWithString:newPath]];
     
 }
+#warning 删除了html中的 lcd分类  如果需要则添加到 html中的"奥松马达"之前的位置
+/*
+    <!-->
+    <category name="奥松 LCD">
+    <block type="grove_serial_lcd_print">
+    <value name="TEXT">
+    <block type="text">
+    <field name="TEXT"></field>
+    </block>
+    </value>
+    <value name="TEXT2">
+    <block type="text">
+    <field name="TEXT"></field>
+    </block>
+    </value>
+    <value name="DELAY_TIME">
+    <block type="math_number">
+    <field name="NUM">1000</field>
+    </block>
+    </value>
+    </block>
+    <block type="grove_serial_lcd_power"></block>
+    <block type="grove_serial_lcd_effect"></block>
+    </category> <-->
+  */
+
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -139,14 +165,17 @@
                 self.file_hash = file_hash;
                 NSLog(@"file_hash:%@",file_hash);
                 
-                
-                [weakSelf.netTool compile:file_hash compliment:^(bool isSuccessed) {
+                if (self.file_hash.length) {
+                    [weakSelf.netTool compile:file_hash compliment:^(bool isSuccessed) {
+                        
+                        if (isSuccessed) {
+                            [weakSelf.netTool downLoad:file_hash savePath:downPath];
+                        }
+                        
+                    }];
+
                     
-                    if (isSuccessed) {
-                        [weakSelf.netTool downLoad:file_hash savePath:downPath];
-                    }
-                    
-                }];
+                }
                 
             }];
 
@@ -168,6 +197,7 @@
 //    [self.netTool compile:self.file_hash];
 //    
 //    [self.netTool downLoad:self.file_hash];
+    
 }
 
 

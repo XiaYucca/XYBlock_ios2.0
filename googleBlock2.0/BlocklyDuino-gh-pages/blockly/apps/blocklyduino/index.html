@@ -31,7 +31,7 @@ function tabClick(clickedName) {
   // If the XML tab was open, save and render the content.
   if (document.getElementById('tab_xml').className == 'tabon') {
     var xmlTextarea = document.getElementById('content_xml');
-    var xmlText = xmlTextarea.value;
+    var xmlText = xmlTextarea.value;  //xml的内容
     var xmlDom = null;
     try {
       xmlDom = Blockly.Xml.textToDom(xmlText);
@@ -69,8 +69,18 @@ function tabClick(clickedName) {
   if (clickedName == 'blocks') {
     Blockly.mainWorkspace.setVisible(true);
   }
+  
+ // document.getElementById('tab_xml').style.visibility = 'hidden';
+  //document.getElementById('content_xml').style.visibility = 'hidden';
+  
   Blockly.fireUiEvent(window, 'resize');
 }
+  
+  
+
+  
+  
+  
 
 /**
  * Populate the currently selected pane with content generated from the blocks.
@@ -322,11 +332,42 @@ function init() {
             <td class="tabmax">
               <button type="button" onclick="uploadClick()">更新</button>
               <button type="button" onclick="resetClick()">重置</button>
-              <!--button onclick="discard()">Discard</button-->
-              <button onclick="saveCode()">保存Arduino
+              <button id="test_xml" type="button" onclick="testXML()">测试XML</button>
+              <button type="button" onclick="saveCode()">保存Arduino
               
               
-              
+         <script>
+             function testXML(){
+                 
+                 var btn_test = document.getElementById("test_xml");
+                 
+                 var testContentXml = document.getElementById("content_xml");
+                 
+             //    testContentXml.setVisible (true);
+                 
+                 selected = 'blocks';
+                // Code.tabClick("blocks");
+                 
+                 //  Code.loadBlocks(xml_text);
+                 
+                 
+                var xml_text  = "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"controls_if\" id=\"47\" inline=\"false\" x=\"63\" y=\"38\"><mutation else=\"1\"></mutation><value name=\"IF0\"><block type=\"grove_button\" id=\"41\"><field name=\"PIN\">3</field></block></value><statement name=\"DO0\"><block type=\"grove_rgb_led\" id=\"21\"><mutation items=\"2\" rgb0=\"#660000\" rgb1=\"#660000\"></mutation><field name=\"PIN\">1</field><field name=\"RGB0\">#660000</field><field name=\"RGB1\">#000099</field></block></statement><statement name=\"ELSE\"><block type=\"grove_rgb_led\" id=\"52\"><mutation items=\"2\" rgb0=\"#006600\" rgb1=\"#006600\"></mutation><field name=\"PIN\">1</field><field name=\"RGB0\">#006600</field><field name=\"RGB1\">#663366</field></block></statement></block></xml>";
+               
+               testContentXml.value = xml_text;
+               
+               tabClick("blocks");
+               
+               
+               
+
+            //     var Code = new code();
+            //     Code.loadBlocks(xml_text);
+                 
+               
+                 
+                 
+             }
+             </script>
               
               
               
@@ -468,7 +509,7 @@ function init() {
       <block type="grove_piezo_buzzer"></block>
       <block type="grove_pir_motion_sensor"></block>
       <block type="grove_line_finder"></block>
-      <block type="grove_rgb_led"></block>
+      <!--block   type="grove_rgb_led"></block-->
       <block type="grove_ultrasonic_ranger"></block>
      
 		
@@ -477,27 +518,7 @@ function init() {
       <block type="grove_sound_sensor"></block>
       <block type="grove_thumb_joystick"></block>
     </category>
-    <category name="奥松 LCD">
-      <block type="grove_serial_lcd_print">
-        <value name="TEXT">
-          <block type="text">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-        <value name="TEXT2">
-          <block type="text">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-        <value name="DELAY_TIME">
-          <block type="math_number">
-            <field name="NUM">1000</field>
-          </block>
-        </value>
-      </block>
-      <block type="grove_serial_lcd_power"></block>
-      <block type="grove_serial_lcd_effect"></block>
-    </category>
+
     <category name="奥松马达">
       <block type="grove_motor_shield"></block>
     </category>

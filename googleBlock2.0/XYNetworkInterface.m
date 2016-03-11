@@ -22,13 +22,14 @@
 
 //服务器密钥
 const NSString *secriteKey = @"cf0bdfe00e9332d64bfbab9d760e309b0fb46d1a";
+//const NSString *baseUrlString = @"http://www.robotbase.cn/arduino";
 
-const NSString *baseUrlString = @"http://www.robotbase.cn/arduino";
-const NSString *loginUrl = @"http://www.robotbase.cn/arduino/login";
-//@"http://compile.alsrobot.cn/login?";
-const NSString *uploadUrl = @"http://www.robotbase.cn/arduino/upload";// @"http://compile.alsrobot.cn/upload";
-const NSString *downloadUrl = @"http://www.robotbase.cn/arduino/download";
-const NSString *compileUrl = @"http://www.robotbase.cn/arduino/compile";
+const NSString *baseUrlString = @"http://arduino.alsrobot.cn/";
+const NSString *loginUrl =  @"http://arduino.alsrobot.cn/login";
+
+const NSString *uploadUrl = @"http://arduino.alsrobot.cn/upload";
+const NSString *downloadUrl = @"http://arduino.alsrobot.cn/download";
+const NSString *compileUrl = @"http://arduino.alsrobot.cn/compile";
 
 
 const NSString *statusParametersError = @"-1";
@@ -61,9 +62,8 @@ static id sessionManager;
 -(NSString *)getUUID
 {
     NSString *identifierForVendor = [[UIDevice currentDevice].identifierForVendor UUIDString];
-    // NSString *identifierForAdvertising = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
-  //   NSLog(@"UUID---:%@",identifierForVendor);
-    
+//  NSString *identifierForAdvertising = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
+//  NSLog(@"UUID---:%@",identifierForVendor);
     [NSURL URLWithString:baseUrlString];
     return identifierForVendor;
 }
@@ -75,7 +75,6 @@ static id sessionManager;
     NSString *timeString = [NSString stringWithFormat:@"%.0f", a];
     
 //  NSLog(@"++++++++%ld""""""""\n", time(NULL));  // 这句也可以获得时间戳，跟上面一样，精确到秒
-    
 //  NSLog(@"getTime:%@",timeString);
 
     return timeString;
@@ -311,7 +310,7 @@ failue:(void (^)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error
        
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         
-        if (dict[@"status"]) {
+        if (dict[@"status"]>0) {
             NSLog(@"登陆成功");
             !compliment?:compliment(YES);
         }
@@ -349,8 +348,9 @@ NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFo
 //    
     NSURL *filePathUrl = [NSURL fileURLWithPath:filePath];
     
-    [formData appendPartWithFileURL:filePathUrl name:@"file" fileName:@"file.c" mimeType:@"file" error:nil];
+    [formData appendPartWithFileURL:filePathUrl name:@"file" fileName:@"file.ino" mimeType:@"file" error:nil];
 } error:nil];
+   // NSLog(@"formdata-----%@!\n",formData);
 
 AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 
@@ -370,18 +370,25 @@ uploadTask = [manager
               completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                   if (error) {
                       NSLog(@"Error: %@", error);
+                        !complilment ?:complilment(nil);
                   } else {
-                      NSLog(@"upload--- :%@",responseObject);
+                      NSLog(@"upload--responseObject- :%@\n  ",responseObject);
+                      NSDictionary *dict = responseObject;
 
-                      NSDictionary *dict  = responseObject[@"obj"];
-                      NSDictionary *obj = dict[@"file_hash"];
-                      if (responseObject[@"status"]>0) {
+                      NSInteger status = ((NSString*)dict[@"status"]).integerValue;
+                      if (status>0) {
+                          NSDictionary *dict_temp  = dict[@"obj"];
+                          NSLog(@"\nupload---dict%@\n",dict_temp);
+                          NSString* obj;
+                          if (dict_temp) {
+                              obj = dict_temp[@"file_hash"];
+                          }
                           NSLog(@"上传文件成功");
                           !complilment ?:complilment(obj);
-
                       }
                       else
-                      {
+                      {    NSLog(@"文件错误");
+
                           !complilment ?:complilment(nil);
                       }
                     }
