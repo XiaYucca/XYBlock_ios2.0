@@ -6,51 +6,95 @@
 //  Copyright © 2016年 RainPoll. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "JSWebViewController.h"
 #import "XYNetworkInterface.h"
+#import "WebViewJavascriptBridge.h"
+/**
+ 
+    这个使用 webView原生的代理方法 
+    注意这个和buridge的底层有冲突所以 注意
+ **/
 
-@interface ViewController ()<UIWebViewDelegate>
 
-@property (nonatomic ,strong)UIWebView *webView;
+@interface JSWebViewController ()<UIWebViewDelegate>
+
+
 @property (nonatomic ,strong)NetworkConnect* netTool;
 @property (nonatomic,copy)NSString *file_hash;
 
+@property (nonatomic ,strong)WebViewJavascriptBridge *bridge;
+
 @end
 
-@implementation ViewController
+@implementation JSWebViewController
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
-    self.webView = [self.view viewWithTag:100];
-    self.webView.delegate = self;
-    self.netTool = [[NetworkConnect alloc]init];
+ /*   UIButton *button= [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 60)];
+    
+    button.backgroundColor = [UIColor redColor];
+    
+    [button addTarget:self action:@selector(btnCallHandler:) forControlEvents:UIControlEventTouchUpInside
+     ];
+    
+    [self.view addSubview:button];
+ 
     
     
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, button.frame.size.height, self.view.frame.size.width, self.view.frame.size.height- button.frame.size.height)];
+    [self.view addSubview:self.webView];
 
-    //  NSString *filePath = [[NSBundle mainBundle]pathForResource:@"index" ofType:@"html"];
+*/
     
-    NSString *contentPath = [NSBundle mainBundle].bundlePath;
-    // NSLog(@"%@",contentPath);
-    // NSLog(@"------>%@",[NSBundle allBundles]);
-    
-    //   NSDirectoryEnumerator *enumertor = [manager enumeratorAtPath:contentPath];
-    
-    NSString *newPath = [NSString stringWithFormat:@"%@/BlocklyDuino-gh-pages/blockly/apps/blocklyduino/index.html",contentPath];
-    
-    
-    NSString *htmlString = [NSString stringWithContentsOfFile:newPath encoding:NSUTF8StringEncoding error:nil];
-    
-    //   NSArray *path =[manager contentsOfDirectoryAtPath:contentPath error:nil];
-    
-    
-  //   NSLog(@"path ---%@\nhtmlString---%@",newPath,htmlString);
-    
-    [self.webView loadHTMLString:htmlString baseURL:[NSURL URLWithString:newPath]];
-    
+   
 }
+
+-(void)setWebView:(UIWebView *)webView
+{
+    if (_webView != webView ) {
+        _webView = webView;
+        _webView.delegate = self;
+        self.netTool = [[NetworkConnect alloc]init];
+        
+        NSLog(@"%@",webView);
+    }
+}
+
+-(void)loadBridge
+{
+    if (_bridge) { return; }
+    
+    [WebViewJavascriptBridge enableLogging];
+    
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];
+    
+    [self.bridge registerHandler:@"testObjcCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
+        NSLog(@"testObjcCallback called: %@\n", data);
+        responseCallback(@"test oc registerHander_data");
+    }];
+    NSLog(@"------%@",_bridge);
+//    [_bridge callHandler:@"testJavascriptHandler" data:@{ @"foo":@"before ready"}];
+    
+//    [self renderButtons:webView];
+//    [self loadExamplePage:webView];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+  //  [self loadBridge];
+  //  [_bridge send:]
+}
+
+
+- (IBAction)btnCallHandler:(id)sender {
+    id data = @{ @"greetingFromObjC": @"Hi there, JS!" };
+    id dataXml=@"<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"controls_if\" id=\"47\" inline=\"false\" x=\"63\" y=\"38\"><mutation else=\"1\"></mutation><value name=\"IF0\"><block type=\"grove_button\" id=\"41\"><field name=\"PIN\">3</field></block></value><statement name=\"DO0\"><block type=\"grove_rgb_led\" id=\"21\"><mutation items=\"2\" rgb0=\"#660000\" rgb1=\"#660000\"></mutation><field name=\"PIN\">1</field><field name=\"RGB0\">#660000</field><field name=\"RGB1\">#000099</field></block></statement><statement name=\"ELSE\"><block type=\"grove_rgb_led\" id=\"52\"><mutation items=\"2\" rgb0=\"#006600\" rgb1=\"#006600\"></mutation><field name=\"PIN\">1</field><field name=\"RGB0\">#006600</field><field name=\"RGB1\">#663366</field></block></statement></block></xml>";
+    [self.bridge callHandler:@"testJavascriptHandler" data:data responseCallback:^(id response) {
+        NSLog(@"++++++++++testJavascriptHandler responded: %@", response);
+    }];
+}
+
 #warning 删除了html中的 lcd分类  如果需要则添加到 html中的"奥松马达"之前的位置
 /*
     <!-->
@@ -78,7 +122,7 @@
   */
 
 
-- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
+- (BOOL)webView_delete:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *urlString = [[request URL] absoluteString];
     
@@ -103,6 +147,7 @@
     [result writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
     NSLog(@"\n\nfilePath---->%@",filePath);
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
           [self connectUploadFile:filePath downPath:[NSString stringWithFormat:@"%@%@",[self pathForDocument],@"/downFile.hex"]];
@@ -114,12 +159,7 @@
 
 - (NSString *)replaceUnicode:(NSString *)unicodeStr
 {
- 
-    
-//    return  (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,  (CFStringRef)unicodeStr, nil, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
-    
-        
-        NSString *outputStrCode = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)unicodeStr,NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]",kCFStringEncodingUTF8);
+    NSString *outputStrCode = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)unicodeStr,NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]",kCFStringEncodingUTF8);
     
     
     
@@ -156,7 +196,7 @@
 -(void)connectUploadFile:(NSString *)uploadPath downPath:(NSString *)downPath
 {
   //  [self.netTool login];
-    __weak ViewController* weakSelf = self;
+    __weak JSWebViewController* weakSelf = self;
     
     [self.netTool login:^(bool isSuccessed) {
         if (isSuccessed) {
@@ -181,23 +221,6 @@
 
         }
     }];
-    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self.netTool mutiPartUpload:uploadPath compliment:^(NSString *file_hash) {
-//                self.file_hash = file_hash;
-//                NSLog(@"file_hash:%@",file_hash);
-//            }];
-//    });
-    
-//    [self.netTool mutiPartUpload:uploadPath compliment:^(NSString *file_hash) {
-//        self.file_hash = file_hash;
-//        NSLog(@"file_hash:%@",file_hash);
-//    }];
-//    
-//    [self.netTool compile:self.file_hash];
-//    
-//    [self.netTool downLoad:self.file_hash];
-    
 }
 
 
@@ -208,7 +231,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

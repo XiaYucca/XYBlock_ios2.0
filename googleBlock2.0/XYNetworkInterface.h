@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface XYNetworkInterface : NSObject
+
+
+
 
 -(NSString *)getUUID;
 -(NSString *)getTimestamp;

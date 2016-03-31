@@ -248,17 +248,17 @@ function uploadCode(code, callback) {
 }
 
 function uploadClick() {
-    var code = document.getElementById('content_arduino').value;
-
-    alert("Ready to upload to Arduino.");
-    
-    uploadCode(code, function(status, errorInfo) {
-        if (status == 200) {
-            alert("Program uploaded ok");
-        } else {
-            alert("Error uploading program: " + errorInfo);
-        }
-    });
+//    var code = document.getElementById('content_arduino').value;
+//
+//    alert("Ready to upload to Arduino.");
+//    
+//    uploadCode(code, function(status, errorInfo) {
+//        if (status == 200) {
+//            alert("Program uploaded ok");
+//        } else {
+//            alert("Error uploading program: " + errorInfo);
+//        }
+//    });
 }
 
 function resetClick() {

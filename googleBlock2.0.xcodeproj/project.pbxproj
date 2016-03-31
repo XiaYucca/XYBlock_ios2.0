@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C10570E11CAB6B0800A37C0B /* JZSwipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C10570E01CAB6B0800A37C0B /* JZSwipeCell.m */; };
+		C10570E71CAB7FC600A37C0B /* MCSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C10570E61CAB7FC600A37C0B /* MCSwipeTableViewCell.m */; };
+		C1405C401C9656B7006FE66D /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = C1405C391C9656B7006FE66D /* WebViewJavascriptBridge.m */; };
+		C1405C411C9656B7006FE66D /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = C1405C3B1C9656B7006FE66D /* WebViewJavascriptBridge_JS.m */; };
+		C1405C421C9656B7006FE66D /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C1405C3D1C9656B7006FE66D /* WebViewJavascriptBridgeBase.m */; };
+		C1405C431C9656B7006FE66D /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = C1405C3F1C9656B7006FE66D /* WKWebViewJavascriptBridge.m */; };
+		C1405C461C9661E0006FE66D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1405C451C9661E0006FE66D /* WebKit.framework */; };
+		C1405C491C96A345006FE66D /* ExampleUIWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1405C481C96A345006FE66D /* ExampleUIWebViewController.m */; };
+		C1405C4B1C96AC78006FE66D /* ExampleApp.html in Resources */ = {isa = PBXBuildFile; fileRef = C1405C4A1C96AC78006FE66D /* ExampleApp.html */; };
 		C14E6DA81C883FE80081F523 /* XYNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */; };
 		C14E6DB71C88403D0081F523 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C14E6DAB1C88403D0081F523 /* AFHTTPSessionManager.m */; };
 		C14E6DB81C88403D0081F523 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C14E6DAE1C88403D0081F523 /* AFNetworkReachabilityManager.m */; };
@@ -14,15 +23,19 @@
 		C14E6DBA1C88403D0081F523 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C14E6DB21C88403D0081F523 /* AFURLRequestSerialization.m */; };
 		C14E6DBB1C88403D0081F523 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C14E6DB41C88403D0081F523 /* AFURLResponseSerialization.m */; };
 		C14E6DBC1C88403D0081F523 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C14E6DB61C88403D0081F523 /* AFURLSessionManager.m */; };
+		C150431D1C9F918D00F42905 /* BlocklyDuino-pages in Resources */ = {isa = PBXBuildFile; fileRef = C150431C1C9F918D00F42905 /* BlocklyDuino-pages */; };
+		C16033D91CACECFE00D6BA9B /* XYSwiperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C16033D71CACECFE00D6BA9B /* XYSwiperCell.m */; };
+		C16033DA1CACECFE00D6BA9B /* XYSwiperCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C16033D81CACECFE00D6BA9B /* XYSwiperCell.xib */; };
 		C18E0E871C7AFD440097A842 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C18E0E861C7AFD440097A842 /* main.m */; };
 		C18E0E8A1C7AFD440097A842 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C18E0E891C7AFD440097A842 /* AppDelegate.m */; };
-		C18E0E8D1C7AFD440097A842 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C18E0E8C1C7AFD440097A842 /* ViewController.m */; };
+		C18E0E8D1C7AFD440097A842 /* JSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C18E0E8C1C7AFD440097A842 /* JSWebViewController.m */; };
 		C18E0E901C7AFD440097A842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C18E0E8E1C7AFD440097A842 /* Main.storyboard */; };
 		C18E0E921C7AFD440097A842 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C18E0E911C7AFD440097A842 /* Assets.xcassets */; };
 		C18E0E951C7AFD440097A842 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C18E0E931C7AFD440097A842 /* LaunchScreen.storyboard */; };
 		C18E0EA01C7AFD440097A842 /* googleBlock2_0Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = C18E0E9F1C7AFD440097A842 /* googleBlock2_0Tests.m */; };
 		C18E0EAB1C7AFD450097A842 /* googleBlock2_0UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C18E0EAA1C7AFD450097A842 /* googleBlock2_0UITests.m */; };
 		C18E0EB91C7AFD720097A842 /* BlocklyDuino-gh-pages in Resources */ = {isa = PBXBuildFile; fileRef = C18E0EB81C7AFD720097A842 /* BlocklyDuino-gh-pages */; };
+		C19A1B9F1CAA89C3006CD176 /* FileOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = C19A1B9E1CAA89C3006CD176 /* FileOptions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +56,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C10570DF1CAB6B0800A37C0B /* JZSwipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZSwipeCell.h; sourceTree = "<group>"; };
+		C10570E01CAB6B0800A37C0B /* JZSwipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZSwipeCell.m; sourceTree = "<group>"; };
+		C10570E51CAB7FC600A37C0B /* MCSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSwipeTableViewCell.h; sourceTree = "<group>"; };
+		C10570E61CAB7FC600A37C0B /* MCSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSwipeTableViewCell.m; sourceTree = "<group>"; };
+		C1405C381C9656B7006FE66D /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		C1405C391C9656B7006FE66D /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		C1405C3A1C9656B7006FE66D /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
+		C1405C3B1C9656B7006FE66D /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
+		C1405C3C1C9656B7006FE66D /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
+		C1405C3D1C9656B7006FE66D /* WebViewJavascriptBridgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridgeBase.m; sourceTree = "<group>"; };
+		C1405C3E1C9656B7006FE66D /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		C1405C3F1C9656B7006FE66D /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		C1405C451C9661E0006FE66D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		C1405C471C96A345006FE66D /* ExampleUIWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleUIWebViewController.h; sourceTree = "<group>"; };
+		C1405C481C96A345006FE66D /* ExampleUIWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleUIWebViewController.m; sourceTree = "<group>"; };
+		C1405C4A1C96AC78006FE66D /* ExampleApp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ExampleApp.html; sourceTree = "<group>"; };
 		C14E6DA61C883FE80081F523 /* XYNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYNetworkInterface.h; sourceTree = "<group>"; };
 		C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYNetworkInterface.m; sourceTree = "<group>"; };
 		C14E6DAA1C88403D0081F523 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -58,12 +87,16 @@
 		C14E6DB41C88403D0081F523 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		C14E6DB51C88403D0081F523 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		C14E6DB61C88403D0081F523 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		C150431C1C9F918D00F42905 /* BlocklyDuino-pages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "BlocklyDuino-pages"; sourceTree = "<group>"; };
+		C16033D61CACECFE00D6BA9B /* XYSwiperCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSwiperCell.h; sourceTree = "<group>"; };
+		C16033D71CACECFE00D6BA9B /* XYSwiperCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSwiperCell.m; sourceTree = "<group>"; };
+		C16033D81CACECFE00D6BA9B /* XYSwiperCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYSwiperCell.xib; sourceTree = "<group>"; };
 		C18E0E821C7AFD440097A842 /* googleBlock2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = googleBlock2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18E0E861C7AFD440097A842 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C18E0E881C7AFD440097A842 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C18E0E891C7AFD440097A842 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C18E0E8B1C7AFD440097A842 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C18E0E8C1C7AFD440097A842 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C18E0E8B1C7AFD440097A842 /* JSWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSWebViewController.h; sourceTree = "<group>"; };
+		C18E0E8C1C7AFD440097A842 /* JSWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSWebViewController.m; sourceTree = "<group>"; };
 		C18E0E8F1C7AFD440097A842 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C18E0E911C7AFD440097A842 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C18E0E941C7AFD440097A842 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -75,6 +108,8 @@
 		C18E0EAA1C7AFD450097A842 /* googleBlock2_0UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = googleBlock2_0UITests.m; sourceTree = "<group>"; };
 		C18E0EAC1C7AFD450097A842 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C18E0EB81C7AFD720097A842 /* BlocklyDuino-gh-pages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "BlocklyDuino-gh-pages"; sourceTree = "<group>"; };
+		C19A1B9D1CAA89C3006CD176 /* FileOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOptions.h; sourceTree = "<group>"; };
+		C19A1B9E1CAA89C3006CD176 /* FileOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileOptions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1405C461C9661E0006FE66D /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +138,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C1405C371C9656B7006FE66D /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				C1405C381C9656B7006FE66D /* WebViewJavascriptBridge.h */,
+				C1405C391C9656B7006FE66D /* WebViewJavascriptBridge.m */,
+				C1405C3A1C9656B7006FE66D /* WebViewJavascriptBridge_JS.h */,
+				C1405C3B1C9656B7006FE66D /* WebViewJavascriptBridge_JS.m */,
+				C1405C3C1C9656B7006FE66D /* WebViewJavascriptBridgeBase.h */,
+				C1405C3D1C9656B7006FE66D /* WebViewJavascriptBridgeBase.m */,
+				C1405C3E1C9656B7006FE66D /* WKWebViewJavascriptBridge.h */,
+				C1405C3F1C9656B7006FE66D /* WKWebViewJavascriptBridge.m */,
+			);
+			path = WebViewJavascriptBridge;
+			sourceTree = "<group>";
+		};
+		C1405C441C9661B5006FE66D /* FrameWorks */ = {
+			isa = PBXGroup;
+			children = (
+				C1405C451C9661E0006FE66D /* WebKit.framework */,
+			);
+			name = FrameWorks;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		C14E6DA91C88403D0081F523 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +180,40 @@
 				C14E6DB61C88403D0081F523 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		C16033DB1CACED0C00D6BA9B /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C1405C471C96A345006FE66D /* ExampleUIWebViewController.h */,
+				C1405C481C96A345006FE66D /* ExampleUIWebViewController.m */,
+			);
+			name = MainViewController;
+			sourceTree = "<group>";
+		};
+		C16033DC1CACED5100D6BA9B /* MinorViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C16033D61CACECFE00D6BA9B /* XYSwiperCell.h */,
+				C16033D71CACECFE00D6BA9B /* XYSwiperCell.m */,
+				C16033D81CACECFE00D6BA9B /* XYSwiperCell.xib */,
+			);
+			name = MinorViewController;
+			sourceTree = "<group>";
+		};
+		C16033DD1CACED7300D6BA9B /* TestviewController */ = {
+			isa = PBXGroup;
+			children = (
+				C18E0E8C1C7AFD440097A842 /* JSWebViewController.m */,
+				C18E0E8B1C7AFD440097A842 /* JSWebViewController.h */,
+				C19A1B9D1CAA89C3006CD176 /* FileOptions.h */,
+				C19A1B9E1CAA89C3006CD176 /* FileOptions.m */,
+				C10570DF1CAB6B0800A37C0B /* JZSwipeCell.h */,
+				C10570E01CAB6B0800A37C0B /* JZSwipeCell.m */,
+				C10570E51CAB7FC600A37C0B /* MCSwipeTableViewCell.h */,
+				C10570E61CAB7FC600A37C0B /* MCSwipeTableViewCell.m */,
+			);
+			name = TestviewController;
 			sourceTree = "<group>";
 		};
 		C18E0E791C7AFD440097A842 = {
@@ -145,15 +239,20 @@
 		C18E0E841C7AFD440097A842 /* googleBlock2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				C1405C441C9661B5006FE66D /* FrameWorks */,
+				C1405C371C9656B7006FE66D /* WebViewJavascriptBridge */,
 				C14E6DA91C88403D0081F523 /* AFNetworking */,
 				C14E6DA61C883FE80081F523 /* XYNetworkInterface.h */,
 				C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */,
+				C150431C1C9F918D00F42905 /* BlocklyDuino-pages */,
 				C18E0E881C7AFD440097A842 /* AppDelegate.h */,
 				C18E0EB81C7AFD720097A842 /* BlocklyDuino-gh-pages */,
 				C18E0E891C7AFD440097A842 /* AppDelegate.m */,
-				C18E0E8B1C7AFD440097A842 /* ViewController.h */,
-				C18E0E8C1C7AFD440097A842 /* ViewController.m */,
+				C16033DB1CACED0C00D6BA9B /* MainViewController */,
+				C16033DC1CACED5100D6BA9B /* MinorViewController */,
+				C16033DD1CACED7300D6BA9B /* TestviewController */,
 				C18E0E8E1C7AFD440097A842 /* Main.storyboard */,
+				C1405C4A1C96AC78006FE66D /* ExampleApp.html */,
 				C18E0E911C7AFD440097A842 /* Assets.xcassets */,
 				C18E0E931C7AFD440097A842 /* LaunchScreen.storyboard */,
 				C18E0E961C7AFD440097A842 /* Info.plist */,
@@ -291,10 +390,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1405C4B1C96AC78006FE66D /* ExampleApp.html in Resources */,
 				C18E0E951C7AFD440097A842 /* LaunchScreen.storyboard in Resources */,
 				C18E0EB91C7AFD720097A842 /* BlocklyDuino-gh-pages in Resources */,
+				C150431D1C9F918D00F42905 /* BlocklyDuino-pages in Resources */,
 				C18E0E921C7AFD440097A842 /* Assets.xcassets in Resources */,
 				C18E0E901C7AFD440097A842 /* Main.storyboard in Resources */,
+				C16033DA1CACECFE00D6BA9B /* XYSwiperCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,15 +422,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				C14E6DB91C88403D0081F523 /* AFSecurityPolicy.m in Sources */,
+				C1405C421C9656B7006FE66D /* WebViewJavascriptBridgeBase.m in Sources */,
 				C14E6DBB1C88403D0081F523 /* AFURLResponseSerialization.m in Sources */,
-				C18E0E8D1C7AFD440097A842 /* ViewController.m in Sources */,
+				C18E0E8D1C7AFD440097A842 /* JSWebViewController.m in Sources */,
+				C19A1B9F1CAA89C3006CD176 /* FileOptions.m in Sources */,
+				C10570E11CAB6B0800A37C0B /* JZSwipeCell.m in Sources */,
+				C1405C401C9656B7006FE66D /* WebViewJavascriptBridge.m in Sources */,
 				C18E0E8A1C7AFD440097A842 /* AppDelegate.m in Sources */,
 				C14E6DB71C88403D0081F523 /* AFHTTPSessionManager.m in Sources */,
+				C16033D91CACECFE00D6BA9B /* XYSwiperCell.m in Sources */,
 				C14E6DBC1C88403D0081F523 /* AFURLSessionManager.m in Sources */,
 				C18E0E871C7AFD440097A842 /* main.m in Sources */,
+				C1405C411C9656B7006FE66D /* WebViewJavascriptBridge_JS.m in Sources */,
 				C14E6DB81C88403D0081F523 /* AFNetworkReachabilityManager.m in Sources */,
 				C14E6DA81C883FE80081F523 /* XYNetworkInterface.m in Sources */,
+				C10570E71CAB7FC600A37C0B /* MCSwipeTableViewCell.m in Sources */,
 				C14E6DBA1C88403D0081F523 /* AFURLRequestSerialization.m in Sources */,
+				C1405C431C9656B7006FE66D /* WKWebViewJavascriptBridge.m in Sources */,
+				C1405C491C96A345006FE66D /* ExampleUIWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

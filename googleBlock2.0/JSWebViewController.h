@@ -6,9 +6,11 @@
 //  Copyright © 2016年 RainPoll. All rights reserved.
 //
 
+
+
 #import <UIKit/UIKit.h>
-@interface ViewController : UIViewController
+@interface JSWebViewController : UIViewController
 
-
+@property (nonatomic ,weak)UIWebView *webView;
 @end
 

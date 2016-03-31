@@ -18,6 +18,7 @@
 
 //#import "AFHTTPRequestManager.h"
 
+
 #define baseURL [NSURL URLWithString:baseUrlString]
 
 //服务器密钥
@@ -37,8 +38,6 @@ const NSString *statusFileNotFound = @"-2";
 const NSString *statusCompliFailued = @"-3";
 const NSString *statusSuccesed = @"1";
 const NSString *statusLoginFailued =@"-99";
-
-
 
 
 
@@ -70,7 +69,7 @@ static id sessionManager;
 
 -(NSString *)getTimestamp
 {
-    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSDate *dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeString = [NSString stringWithFormat:@"%.0f", a];
     
@@ -491,6 +490,7 @@ uploadTask = [manager
     }];
     return 1;
 }
+
 
 
 

@@ -14,6 +14,11 @@
   <script type="text/javascript" src="code.js">
  </script>
   <script>
+  
+                              
+    var recievedData = "no data";
+    var xmlTemp = "";
+    
 
 /**
  * List of tab names.
@@ -22,6 +27,8 @@
 var TABS_ = ['blocks', 'arduino', 'xml'];
 
 var selected = 'blocks';
+
+//var testValue : int  = 6;
 
 /**
  * Switch the visible pane when a tab is clicked.
@@ -33,8 +40,13 @@ function tabClick(clickedName) {
     var xmlTextarea = document.getElementById('content_xml');
     var xmlText = xmlTextarea.value;  //xml的内容
     var xmlDom = null;
+   // var xmlTemp =
+    
     try {
-      xmlDom = Blockly.Xml.textToDom(xmlText);
+        
+     // xmlDom = Blockly.Xml.textToDom(xmlText);
+       xmlDom = Blockly.Xml.textToDom(xmlTemp);
+      
     } catch (e) {
       var q =
           window.confirm('Error parsing XML:\n' + e + '\n\nAbandon changes?');
@@ -70,14 +82,64 @@ function tabClick(clickedName) {
     Blockly.mainWorkspace.setVisible(true);
   }
   
- // document.getElementById('tab_xml').style.visibility = 'hidden';
-  //document.getElementById('content_xml').style.visibility = 'hidden';
+//  document.getElementById('tab_xml').style.visibility = 'hidden';
+//  document.getElementById('content_xml').style.visibility = 'hidden';
   
   Blockly.fireUiEvent(window, 'resize');
 }
   
   
-
+  function tab_testClick(clickedName,xml_text) {
+      // If the XML tab was open, save and render the content.
+    if (document.getElementById('tab_xml').className == 'tabon') {
+          var xmlTextarea = document.getElementById('content_xml');
+          var xmlText = xmlTextarea.value;  //xml的内容
+          var xmlDom = null;
+        //  xmlDom = xml_text;
+          xmlText = xmlTemp;
+          try {
+              xmlDom = Blockly.Xml.textToDom(xmlText);
+          } catch (e) {
+              var q =
+              window.confirm('Error parsing XML:\n' + e + '\n\nAbandon changes?');
+              if (!q) {
+                  // Leave the user on the XML tab.
+                  return;
+              }
+          }
+          if (xmlDom) {
+              Blockly.mainWorkspace.clear();
+              Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+          }
+      }
+      
+      if (document.getElementById('tab_blocks').className == 'tabon') {
+          Blockly.mainWorkspace.setVisible(false);
+      }
+      // Deselect all tabs and hide all panes.
+      for (var i = 0; i < TABS_.length; i++) {
+          var name = TABS_[i];
+          document.getElementById('tab_' + name).className = 'taboff';
+          document.getElementById('content_' + name).style.visibility = 'hidden';
+      }
+      
+      // Select the active tab.
+      selected = clickedName;
+      document.getElementById('tab_' + clickedName).className = 'tabon';
+      // Show the selected pane.
+      document.getElementById('content_' + clickedName).style.visibility =
+      'visible';
+      renderContent();
+      if (clickedName == 'blocks') {
+          Blockly.mainWorkspace.setVisible(true);
+      }
+      
+      // document.getElementById('tab_xml').style.visibility = 'hidden';
+      //document.getElementById('content_xml').style.visibility = 'hidden';
+      
+      Blockly.fireUiEvent(window, 'resize');
+  }
+  
   
   
   
@@ -89,6 +151,20 @@ function renderContent() {
   var content = document.getElementById('content_' + selected);
   // Initialize the pane.
   if (content.id == 'content_blocks') {
+      
+ /*     var xmlTextarea = document.getElementById('content_blocks');
+     // var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+      
+      //    xmlTemp = xmlText;
+      xmlTextarea.value = xmlText;
+      xmlTextarea.focus();
+*/
+
+       var xmlTextarea = document.getElementById('content_blocks');
+       xmlTextarea.focus();
+       
+       
     // If the workspace was changed by the XML tab, Firefox will have performed
     // an incomplete rendering due to Blockly being invisible.  Rerender.
     Blockly.mainWorkspace.render();
@@ -96,8 +172,13 @@ function renderContent() {
     var xmlTextarea = document.getElementById('content_xml');
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+    
+    xmlTemp = xmlText;
     xmlTextarea.value = xmlText;
-    xmlTextarea.focus();
+    //xmlTextarea.focus();
+//    document.getElementById('content_blocks').focus();
+    
+    
   /*} else if (content.id == 'content_javascript') {
     content.innerHTML = Blockly.JavaScript.workspaceToCode();
   } else if (content.id == 'content_dart') {
@@ -111,7 +192,7 @@ function renderContent() {
   
     arduinoTextarea.focus();
     
-    window.location.href = arduinoTextarea.value;
+   // window.location.href = arduinoTextarea.value;
   }
 }
 
@@ -182,8 +263,6 @@ function init() {
 
   auto_save_and_restore_blocks();
 
-  //load from url parameter (single param)
-  //http://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
   var dest = unescape(location.search.replace(/^.*\=/, '')).replace(/\+/g, " ");
   if(dest){
     load_by_url(dest);
@@ -310,10 +389,205 @@ function init() {
 
     }
   </script>
-</head>
-<body onload="init()">
-  <table height="100%" width="100%">
+</head> <body onload="init()">
+    
 
+    <script>
+        window.onerror = function(err) {
+            log('window.onerror: ' + err)
+        }
+    
+    
+ 
+    
+    function setupWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        window.WVJBCallbacks = [callback];
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+    }
+    
+    setupWebViewJavascriptBridge(function(bridge) {
+                                 var uniqueId = 1
+                                 function log(message, data) {
+                                 var log = document.getElementById('log')
+                                 var el = document.createElement('div')
+                                 el.className = 'logLine'
+                                 el.innerHTML = uniqueId++ + '. ' + message + ':<br/>' + JSON.stringify(data)
+                                 if (log.children.length) { log.insertBefore(el, log.children[0]) }
+                               //  else { log.appendChild(el) }
+                                 
+                                 }
+                                 
+                                 bridge.registerHandler('testJavascriptHandler', function(data, responseCallback) {
+                                                        
+                                                        tabClick('xml');
+                                                        log('ObjC called testJavascriptHandler with', data)
+                                                        var responseData = { 'Javascript Says':'Right back atcha!' }
+                                                        log('JS responding with', responseData)
+                                                        responseCallback(data["greetingFromObjC"])
+                                                        var btn_test = document.getElementById("test_updataBtn");
+                                                        btn_test.innerHTML = data["greetingFromObjC"];
+                                                        
+                                                        var data_string = data["greetingFromObjC"];
+                                                        
+                                                        var btn_test = document.getElementById("test_updataBtn");
+                                                        
+                                                        var testContentXml = document.getElementById("content_xml");
+                                                        
+                                                        xmlTemp = data_string;
+                                                        
+                                                        
+                                                        testContentXml.value = data_string;
+                                                        btn_test.innerHTML = data_string;
+                                                        data_change();
+                                                        
+                                                   /*
+                                                        if(data_string == "save")
+                                                        {
+                                                        btn_test.innerHTML = "saveOK";
+                                                        
+                                                        
+                                                        
+                                                        bridge.callHandler('testObjcCallback_save', {'fileCMD': 'SAVE_CMD'}, function(response) {
+                                                                           log('JS got response', response)
+                                                                      
+                                                                           
+                                                                           var testContentXml = document.getElementById("content_xml");
+                                                                           
+                                                                           xmlTemp = response;
+                                                                           
+                                                                           
+                                                                           testContentXml.value = response;
+                                                                                                                                                     data_change();
+                                                                           
+                                                                           
+                                                                           
+                                                                           })
+                                                        
+
+                                                        
+                                                        
+                                                        }
+                                                        
+                                                        if(data_string == "open")
+                                                        {
+                                                        btn_test.innerHTML = "openOK";
+                                                        }
+                                                    */
+                                                        
+                                                        })
+                                 
+                                 document.body.appendChild(document.createElement('br'))
+                                 
+                                 var callbackButton = document.getElementById('tab_manu').insertBefore(document.createElement('button'));
+                                     callbackButton.innerHTML = '读取文档';
+                                 
+                               
+                                 var callbackButton_save = document.getElementById('tab_manu').insertBefore(document.createElement('button'))
+                                   callbackButton_save.innerHTML = '保存文档';
+                                 
+                                 
+                                 callbackButton.onclick = function(e) {
+                                 e.preventDefault()
+                                 
+                                 // tabClick('xml');
+                                 // tabClick('blocks');
+                                 
+                                 log('JS calling handler "testObjcCallback xiayu"')
+                                 bridge.callHandler('testObjcCallback', {'data':'','fileCMD': 'openFile'}, function(response) {
+                                                    log('JS got response', response)
+                                                  /*  var btn_test = document.getElementById("test_updataBtn");
+                                                    
+                                                    var testContentXml = document.getElementById("content_xml");
+                                                    
+                                                    xmlTemp = response;
+                                                    
+                                                    
+                                                    testContentXml.value = response;
+                                                    btn_test.innerHTML = response;
+                                                    data_change();
+                                                   */
+                                                 //   tabClick('xml');
+                                                 //   tabClick('blocks');
+                                                    
+                                                    
+                                                    })
+                                 }
+                                 
+                                 
+                                 callbackButton_save.onclick = function(e) {
+                                 e.preventDefault()
+                                 log('JS calling handler "testObjcCallback xiayu"')
+                                  tabClick('xml');
+                                 data_change();
+                                 bridge.callHandler('testObjcCallback', {'data': xmlTemp,'fileCMD':'saveFile'}, function(response) {
+                                                    log('JS got response', response)
+                                                  /*  var btn_test = document.getElementById("test_updataBtn");
+                                                    
+                                                    var testContentXml = document.getElementById("content_xml");
+                                                    
+                                                    xmlTemp = response;
+                                                    
+                                                    
+                                                    testContentXml.value = response;
+                                                    btn_test.innerHTML = "保存数据";
+                                                    data_change();
+                                                    
+                                                    */
+                                                    
+                                                    })
+                                 }
+                                 
+                                 
+                                 function data_change(){
+                               //  tabClick('xml');
+                                 tabClick('blocks');
+                                 var xmlTextarea = document.getElementById('content_blocks');
+                                 
+                                 xmlTextarea.focus();
+                                 }
+                                 
+                                 
+                                 })
+                                 
+                                 
+                                 
+                              
+/*
+    var callbackButton_save = document.getElementById('tab_manu').insertBefore(document.createElement('button_save'))
+    callbackButton_save.innerHTML = '保存文档'
+    callbackButton_save.onclick = function(e) {
+        e.preventDefault()
+        log('JS calling handler "testObjcCallback xiayu"')
+        bridge.callHandler('testObjcCallback_save', {'foo': 'bar'}, function(response) {
+                           log('JS got response', response)
+                           var btn_test = document.getElementById("test_updataBtn");
+                           
+                           var testContentXml = document.getElementById("content_xml");
+                           
+                           xmlTemp = response;
+                           
+                           
+                           testContentXml.value = response;
+                           btn_test.innerHTML = "收到数据";
+                           data_change();
+                           
+                           
+                           
+                           })
+    }
+    })*/
+
+
+
+        </script>
+<div id='buttons'></div> <div id='log'></div>
+  <table height="100%" width="100%">
     <tr>
       <td>
         <table width="100%">
@@ -329,11 +603,13 @@ function init() {
             <td id="tab_arduino" class="taboff" onclick="tabClick('arduino')">Arduino语言</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff" onclick="tabClick('xml')">XML语言</td>
-            <td class="tabmax">
+            <td id="tab_manu" class="tabmax">
               <button type="button" onclick="uploadClick()">更新</button>
               <button type="button" onclick="resetClick()">重置</button>
               <button id="test_xml" type="button" onclick="testXML()">测试XML</button>
-              <button type="button" onclick="saveCode()">保存Arduino
+              <button type="button" onclick="saveCode()">保存Arduino   </button>
+              <button  id="test_updataBtn" type="button"  onclick="getmessage()">测试传文件</button>
+              
               
               
          <script>
@@ -343,49 +619,72 @@ function init() {
                  
                  var testContentXml = document.getElementById("content_xml");
                  
-             //    testContentXml.setVisible (true);
+             //  testContentXml.setVisible (true);
                  
-                 selected = 'blocks';
-                // Code.tabClick("blocks");
+             //    selected = 'block';
+            //   Code.tabClick("blocks");
                  
-                 //  Code.loadBlocks(xml_text);
+            //   Code.loadBlocks(xml_text);
+                 
                  
                  
                 var xml_text  = "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"controls_if\" id=\"47\" inline=\"false\" x=\"63\" y=\"38\"><mutation else=\"1\"></mutation><value name=\"IF0\"><block type=\"grove_button\" id=\"41\"><field name=\"PIN\">3</field></block></value><statement name=\"DO0\"><block type=\"grove_rgb_led\" id=\"21\"><mutation items=\"2\" rgb0=\"#660000\" rgb1=\"#660000\"></mutation><field name=\"PIN\">1</field><field name=\"RGB0\">#660000</field><field name=\"RGB1\">#000099</field></block></statement><statement name=\"ELSE\"><block type=\"grove_rgb_led\" id=\"52\"><mutation items=\"2\" rgb0=\"#006600\" rgb1=\"#006600\"></mutation><field name=\"PIN\">1</field><field name=\"RGB0\">#006600</field><field name=\"RGB1\">#663366</field></block></statement></block></xml>";
                
-               testContentXml.value = xml_text;
+            //   testContentXml.value = xml_text;
                
-               tabClick("blocks");
+               tabClick('xml');
+               //selected = "block";
+               tab_testClick('block',xml_text);
+               selected = 'block';
+               renderContent();
+              
+               // tabClick("blocks");
                
-               
-               
-
             //     var Code = new code();
             //     Code.loadBlocks(xml_text);
                  
                
                  
-                 
-             }
+            }
+         
+         
+         
+         function testMessage{
+             
+             var testContentXml = document.getElementById("test_updataBtn");
+             testContentXml.innerHTML= recievedData;
+             
+             
+            bridge.callHandler('testObjcCallback', {'foo': 'bar'}, function(response) {
+                                log('JS got response', response)
+                                
+                                //var testContentXml = document.getElementById("content_xml");
+                                testContentXml.innerHTML = "test_responce";
+                                
+                                })
+            }
+         
+        function getmessage(){
+             e.preventDefault()
+             log('JS calling handler "testObjcCallback xiayu"')
+             bridge.callHandler('testObjcCallback', {'foo': 'bar'}, function(response) {
+                                log('JS got response', response)
+                                var testContentXml = document.getElementById("test_updataBtn");
+                                testContentXml.innerHTML= response;
+                                })
+         }
+         })
              </script>
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              </button>
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
               <button onclick="save()">保存XML</button>
               <!--button id="fakeload">Load XML</button-->
               <input type="file" id="load" style="display: none;"/>
