@@ -12,6 +12,7 @@
 #import "FileOptions.h"
 
 #import "XYSwiperCell.h"
+#import "KVNProgress.h"
 
 
 #define animateViewWith 250
@@ -203,6 +204,10 @@ const NSString *cellID = @"cell";
             NSString *data_temp = data[@"data"];
             
             [self compileFile:data_temp];
+            
+            [self setupBaseKVNProgressUI];
+            
+            [self show];
         }
         
     }];
@@ -250,6 +255,9 @@ const NSString *cellID = @"cell";
 -(void)compileFile:(NSString *)data
 {
     self.fileopetions  = [[FileOptions alloc]init];
+    
+    NSLog(@"uploaddata=++++++++++++++++%@",data);
+    
     
     self.fileopetions.filedata = data;
 }
@@ -347,13 +355,29 @@ const NSString *cellID = @"cell";
 }
 -(void)deleateCell:(id)sender
 {
-    XYSwiperCell *cell = sender;
-    NSIndexPath *cellIndex = [self.fileList indexPathForCell:cell];
-    [self.openFileNames removeObjectAtIndex:cellIndex.row];
+    NSString *string = [NSString stringWithFormat:@"是否删除%@?",((XYSwiperCell*)sender).textField.text];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"提示" message:string preferredStyle:UIAlertControllerStyleAlert];
     
-    [self.fileList reloadData];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        XYSwiperCell *cell = sender;
+        NSIndexPath *cellIndex = [self.fileList indexPathForCell:cell];
+        [self.openFileNames removeObjectAtIndex:cellIndex.row];
+        
+        [self.fileList reloadData];
+        }];
     
-    NSLog(@"cell  ------ <<>\n%@\n index ---- %@",cell,cellIndex);
+    UIAlertAction *actionBluth = [UIAlertAction actionWithTitle:@"保留" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertC addAction:action];
+    [alertC addAction:actionBluth];
+    
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertC animated:NO completion:nil];
+    
+   
+    
+ //   NSLog(@"cell  ------ <<>\n%@\n index ---- %@",cell,cellIndex);
     
 }
 
@@ -564,6 +588,34 @@ const NSString *cellID = @"cell";
     
     return str_temp;
 }
+
+#pragma mark - HUD Method
+- (void)setupBaseKVNProgressUI
+{
+    // See the documentation of all appearance propoerties
+    [KVNProgress appearance].statusColor = [UIColor darkGrayColor];
+    [KVNProgress appearance].statusFont = [UIFont systemFontOfSize:17.0f];
+    [KVNProgress appearance].circleStrokeForegroundColor = [UIColor darkGrayColor];
+    [KVNProgress appearance].circleStrokeBackgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.3f];
+    [KVNProgress appearance].circleFillBackgroundColor = [UIColor clearColor];
+    [KVNProgress appearance].backgroundFillColor = [UIColor colorWithWhite:0.9f alpha:0.9f];
+    [KVNProgress appearance].backgroundTintColor = [UIColor whiteColor];
+    [KVNProgress appearance].successColor = [UIColor darkGrayColor];
+    [KVNProgress appearance].errorColor = [UIColor darkGrayColor];
+    [KVNProgress appearance].circleSize = 75.0f;
+    [KVNProgress appearance].lineWidth = 2.0f;
+}
+- (IBAction)show
+{
+ 
+    [KVNProgress show];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+    
+        [KVNProgress dismiss];
+    });
+}
+
 
 
 -(void)buildFileName

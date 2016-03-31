@@ -19,13 +19,15 @@
                         <subviews>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvq-Z8-p0p">
                                 <rect key="frame" x="190" y="7" width="46" height="30"/>
-                                <state key="normal" title="删除"/>
+                                <state key="normal" title="删除">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="cancelBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="J9m-uK-670"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.99919462199999998" green="0.29005613889999998" blue="0.21478456670000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <view tag="100" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="huC-dj-Fx5" userLabel="behandView">
                         <rect key="frame" x="0.0" y="0.0" width="248" height="44"/>

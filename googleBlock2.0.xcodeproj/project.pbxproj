@@ -36,6 +36,10 @@
 		C18E0EAB1C7AFD450097A842 /* googleBlock2_0UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C18E0EAA1C7AFD450097A842 /* googleBlock2_0UITests.m */; };
 		C18E0EB91C7AFD720097A842 /* BlocklyDuino-gh-pages in Resources */ = {isa = PBXBuildFile; fileRef = C18E0EB81C7AFD720097A842 /* BlocklyDuino-gh-pages */; };
 		C19A1B9F1CAA89C3006CD176 /* FileOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = C19A1B9E1CAA89C3006CD176 /* FileOptions.m */; };
+		C1B1A4371CAD310000BE4023 /* KVNProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B1A4361CAD310000BE4023 /* KVNProgress.m */; };
+		C1B1A43D1CAD314600BE4023 /* UIImage+KVNEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B1A43A1CAD314600BE4023 /* UIImage+KVNEmpty.m */; };
+		C1B1A43E1CAD314600BE4023 /* UIImage+KVNImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B1A43C1CAD314600BE4023 /* UIImage+KVNImageEffects.m */; };
+		C1B1A4401CAD316D00BE4023 /* KVNProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1B1A43F1CAD316D00BE4023 /* KVNProgressView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +114,13 @@
 		C18E0EB81C7AFD720097A842 /* BlocklyDuino-gh-pages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "BlocklyDuino-gh-pages"; sourceTree = "<group>"; };
 		C19A1B9D1CAA89C3006CD176 /* FileOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOptions.h; sourceTree = "<group>"; };
 		C19A1B9E1CAA89C3006CD176 /* FileOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileOptions.m; sourceTree = "<group>"; };
+		C1B1A4351CAD310000BE4023 /* KVNProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgress.h; sourceTree = "<group>"; };
+		C1B1A4361CAD310000BE4023 /* KVNProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVNProgress.m; sourceTree = "<group>"; };
+		C1B1A4391CAD314600BE4023 /* UIImage+KVNEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KVNEmpty.h"; sourceTree = "<group>"; };
+		C1B1A43A1CAD314600BE4023 /* UIImage+KVNEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KVNEmpty.m"; sourceTree = "<group>"; };
+		C1B1A43B1CAD314600BE4023 /* UIImage+KVNImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KVNImageEffects.h"; sourceTree = "<group>"; };
+		C1B1A43C1CAD314600BE4023 /* UIImage+KVNImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KVNImageEffects.m"; sourceTree = "<group>"; };
+		C1B1A43F1CAD316D00BE4023 /* KVNProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KVNProgressView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,8 +205,13 @@
 		C16033DC1CACED5100D6BA9B /* MinorViewController */ = {
 			isa = PBXGroup;
 			children = (
+				C1B1A4411CAD317500BE4023 /* HUD */,
+				C14E6DA61C883FE80081F523 /* XYNetworkInterface.h */,
+				C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */,
 				C16033D61CACECFE00D6BA9B /* XYSwiperCell.h */,
 				C16033D71CACECFE00D6BA9B /* XYSwiperCell.m */,
+				C19A1B9D1CAA89C3006CD176 /* FileOptions.h */,
+				C19A1B9E1CAA89C3006CD176 /* FileOptions.m */,
 				C16033D81CACECFE00D6BA9B /* XYSwiperCell.xib */,
 			);
 			name = MinorViewController;
@@ -206,8 +222,6 @@
 			children = (
 				C18E0E8C1C7AFD440097A842 /* JSWebViewController.m */,
 				C18E0E8B1C7AFD440097A842 /* JSWebViewController.h */,
-				C19A1B9D1CAA89C3006CD176 /* FileOptions.h */,
-				C19A1B9E1CAA89C3006CD176 /* FileOptions.m */,
 				C10570DF1CAB6B0800A37C0B /* JZSwipeCell.h */,
 				C10570E01CAB6B0800A37C0B /* JZSwipeCell.m */,
 				C10570E51CAB7FC600A37C0B /* MCSwipeTableViewCell.h */,
@@ -242,8 +256,6 @@
 				C1405C441C9661B5006FE66D /* FrameWorks */,
 				C1405C371C9656B7006FE66D /* WebViewJavascriptBridge */,
 				C14E6DA91C88403D0081F523 /* AFNetworking */,
-				C14E6DA61C883FE80081F523 /* XYNetworkInterface.h */,
-				C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */,
 				C150431C1C9F918D00F42905 /* BlocklyDuino-pages */,
 				C18E0E881C7AFD440097A842 /* AppDelegate.h */,
 				C18E0EB81C7AFD720097A842 /* BlocklyDuino-gh-pages */,
@@ -285,6 +297,28 @@
 				C18E0EAC1C7AFD450097A842 /* Info.plist */,
 			);
 			path = googleBlock2.0UITests;
+			sourceTree = "<group>";
+		};
+		C1B1A4381CAD314600BE4023 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C1B1A43F1CAD316D00BE4023 /* KVNProgressView.xib */,
+				C1B1A4391CAD314600BE4023 /* UIImage+KVNEmpty.h */,
+				C1B1A43A1CAD314600BE4023 /* UIImage+KVNEmpty.m */,
+				C1B1A43B1CAD314600BE4023 /* UIImage+KVNImageEffects.h */,
+				C1B1A43C1CAD314600BE4023 /* UIImage+KVNImageEffects.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		C1B1A4411CAD317500BE4023 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				C1B1A4381CAD314600BE4023 /* Categories */,
+				C1B1A4351CAD310000BE4023 /* KVNProgress.h */,
+				C1B1A4361CAD310000BE4023 /* KVNProgress.m */,
+			);
+			name = HUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,6 +427,7 @@
 				C1405C4B1C96AC78006FE66D /* ExampleApp.html in Resources */,
 				C18E0E951C7AFD440097A842 /* LaunchScreen.storyboard in Resources */,
 				C18E0EB91C7AFD720097A842 /* BlocklyDuino-gh-pages in Resources */,
+				C1B1A4401CAD316D00BE4023 /* KVNProgressView.xib in Resources */,
 				C150431D1C9F918D00F42905 /* BlocklyDuino-pages in Resources */,
 				C18E0E921C7AFD440097A842 /* Assets.xcassets in Resources */,
 				C18E0E901C7AFD440097A842 /* Main.storyboard in Resources */,
@@ -433,8 +468,11 @@
 				C16033D91CACECFE00D6BA9B /* XYSwiperCell.m in Sources */,
 				C14E6DBC1C88403D0081F523 /* AFURLSessionManager.m in Sources */,
 				C18E0E871C7AFD440097A842 /* main.m in Sources */,
+				C1B1A43E1CAD314600BE4023 /* UIImage+KVNImageEffects.m in Sources */,
+				C1B1A4371CAD310000BE4023 /* KVNProgress.m in Sources */,
 				C1405C411C9656B7006FE66D /* WebViewJavascriptBridge_JS.m in Sources */,
 				C14E6DB81C88403D0081F523 /* AFNetworkReachabilityManager.m in Sources */,
+				C1B1A43D1CAD314600BE4023 /* UIImage+KVNEmpty.m in Sources */,
 				C14E6DA81C883FE80081F523 /* XYNetworkInterface.m in Sources */,
 				C10570E71CAB7FC600A37C0B /* MCSwipeTableViewCell.m in Sources */,
 				C14E6DBA1C88403D0081F523 /* AFURLRequestSerialization.m in Sources */,

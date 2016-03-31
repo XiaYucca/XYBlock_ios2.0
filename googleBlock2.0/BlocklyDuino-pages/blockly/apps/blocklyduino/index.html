@@ -1,0 +1,559 @@
+<html manifest=node.manifest>
+<head>
+  <meta charset="utf-8">
+  <title>BlocklyDuino</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../blocks_compressed.js"></script>
+  <script type="text/javascript" src="../../arduino_compressed.js"></script>
+  <!--script type="text/javascript" src="../../msg/js/en.js"></script-->
+  <script type="text/javascript" src="Blob.js"></script>
+  <script type="text/javascript" src="spin.js"></script>
+  <script type="text/javascript" src="FileSaver.min.js"></script>
+  <script type="text/javascript" src="blockly_helper.js">
+ </script>
+  <script type="text/javascript" src="code.js">
+ </script>
+  <script>
+
+/**
+ * List of tab names.
+ * @private
+ */
+var TABS_ = ['blocks', 'arduino'];
+
+var selected = 'blocks';
+
+var recievedData = "no data";
+var xmlTemp = "";
+
+/**
+ * Switch the visible pane when a tab is clicked.
+ * @param {string} clickedName Name of tab clicked.
+ */
+  
+  function complieClick()
+  {
+      
+      var btn_save = document.getElementById('btn_save');
+      
+   
+          
+       btn_save.innerHTML = 'saveClick';
+          
+          window.location.href = xmlTemp; //arduinoTextarea.value;
+  }
+  
+function tabClick(clickedName) {
+  // If the XML tab was open, save and render the content.
+  if(clickedName != 'xml'){
+  if (document.getElementById('tab_xml').className == 'tabon') {
+    var xmlTextarea = document.getElementById('content_xml');
+    var xmlText = xmlTextarea.value;
+    var xmlDom = null;
+    
+    
+    try {
+    // xmlDom = Blockly.Xml.textToDom(xmlText);
+     xmlDom = Blockly.Xml.textToDom(xmlTemp);
+    } catch (e) {
+      var q =
+          window.confirm('Error parsing XML:\n' + e + '\n\nAbandon changes?');
+      if (!q) {
+        // Leave the user on the XML tab.
+        return;
+      }
+    }
+    if (xmlDom) {
+      Blockly.mainWorkspace.clear();
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+    }
+  }
+}
+ 
+  if (document.getElementById('tab_blocks').className == 'tabon') {
+    Blockly.mainWorkspace.setVisible(false);
+  }
+
+  // Deselect all tabs and hide all panes.
+  for (var i = 0; i < TABS_.length; i++) {
+    var name = TABS_[i];
+    document.getElementById('tab_' + name).className = 'taboff';
+    document.getElementById('content_' + name).style.visibility = 'hidden';
+  }
+
+ // Select the active tab.
+  selected = clickedName;
+  document.getElementById('tab_' + clickedName).className = 'tabon';
+  // Show the selected pane.
+  document.getElementById('content_' + clickedName).style.visibility =
+      'visible';
+  renderContent();
+  if (clickedName == 'blocks') {
+    Blockly.mainWorkspace.setVisible(true);
+  }
+  Blockly.fireUiEvent(window, 'resize');
+  
+//  var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+//   xmlTemp = Blockly.Xml.domToPrettyText(xmlDom);
+}
+
+
+/**
+ * Populate the currently selected pane with content generated from the blocks.
+ */
+function renderContent() {
+  var content = document.getElementById('content_' + selected);
+  // Initialize the pane.
+  if (content.id == 'content_blocks') {
+
+    var xmlTextarea = document.getElementById('content_blocks');
+    xmlTextarea.focus();
+    Blockly.mainWorkspace.render();
+
+  } else if (content.id == 'content_xml') {
+    var xmlTextarea = document.getElementById('content_xml');
+    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+    
+    xmlTemp = xmlText;
+  //  xmlTextarea.value = xmlText;
+  //  xmlTextarea.focus();
+  /*} else if (content.id == 'content_javascript') {
+    content.innerHTML = Blockly.JavaScript.workspaceToCode();
+  } else if (content.id == 'content_dart') {
+    content.innerHTML = Blockly.Dart.workspaceToCode();
+  } else if (content.id == 'content_python') {
+    content.innerHTML = Blockly.Python.workspaceToCode();*/
+  } else if (content.id == 'content_arduino') {
+    //content.innerHTML = Blockly.Arduino.workspaceToCode();
+    var arduinoTextarea = document.getElementById('content_arduino');
+    arduinoTextarea.value = Blockly.Arduino.workspaceToCode();
+    
+    
+    //arduinoTextarea.focus();
+ //   window.location.href = arduinoTextarea.value;
+  }
+}
+
+/**
+ * Compute the absolute coordinates and dimensions of an HTML element.
+ * @param {!Element} element Element to match.
+ * @return {!Object} Contains height, width, x, and y properties.
+ * @private
+ */
+function getBBox_(element) {
+  var height = element.offsetHeight;
+  var width = element.offsetWidth;
+  var x = 0;
+  var y = 0;
+  do {
+    x += element.offsetLeft;
+    y += element.offsetTop;
+    element = element.offsetParent;
+  } while (element);
+  return {
+    height: height,
+    width: width,
+    x: x,
+    y: y
+  };
+}
+
+/**
+ * Initialize Blockly.  Called on page load.
+ */
+  
+  
+  
+function init() {
+  //window.onbeforeunload = function() {
+  //  return 'Leaving this page will result in the loss of your work.';
+  //};
+ setUpBridge();
+
+  var container = document.getElementById('content_area');
+  var onresize = function(e) {
+    var bBox = getBBox_(container);
+    for (var i = 0; i < TABS_.length; i++) {
+      var el = document.getElementById('content_' + TABS_[i]);
+      el.style.top = bBox.y + 'px';
+      el.style.left = bBox.x + 'px';
+      // Height and width need to be set, read back, then set again to
+      // compensate for scrollbars.
+      el.style.height = bBox.height + 'px';
+      el.style.height = (2 * bBox.height - el.offsetHeight) + 'px';
+      el.style.width = bBox.width + 'px';
+      el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
+    }
+    // Make the 'Blocks' tab line up with the toolbox.
+    if (Blockly.mainWorkspace.toolbox_.width) {
+      document.getElementById('tab_blocks').style.minWidth =
+          (Blockly.mainWorkspace.toolbox_.minWidth - 38) + 'px';
+          // Account for the 19 pixel margin and on each side.
+        document.getElementById('tab_Logo').style.minWidth =
+                (Blockly.mainWorkspace.toolbox_.width - 38) + 'px';
+        document.getElementById('tab_Logo').style.height = '40px';
+    }
+  };
+  window.addEventListener('resize', onresize, false);
+
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('content_blocks'),
+      {grid:
+          {spacing: 25,
+           length: 3,
+           colour: '#D4D5D9',
+           snap: true},
+       media: '../../media/',
+       toolbox: toolbox       
+     });/*画布中的点*/
+  auto_save_and_restore_blocks();
+
+  //load from url parameter (single param)
+  //http://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
+  /*var dest = unescape(location.search.replace(/^.*\=/, '')).replace(/\+/g, " ");
+  if(dest){
+    load_by_url(dest);
+  }*/
+}
+
+  </script>
+  
+  
+<script>
+    function setUpBridge()
+    {
+        //regist bridge
+        function setupWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+            if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+            window.WVJBCallbacks = [callback];
+            var WVJBIframe = document.createElement('iframe');
+            WVJBIframe.style.display = 'none';
+            WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+            document.documentElement.appendChild(WVJBIframe);
+            setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+        }
+        
+        // setup callback
+        
+        
+          
+        setupWebViewJavascriptBridge(function(bridge) {
+                                     
+                                     /* Initialize your app here */
+                                     
+                                     
+                                     var btn_save = document.getElementById('btn_save');
+                                     
+                                     btn_save.onclick = function(e){
+                                     
+                                    // btn_save.innerHTML = 'saveClick';
+                                     
+                                     tabClick('xml');
+                                     tabClick('blocks');
+                                     
+                                     bridge.callHandler('testObjcCallback', {'data':xmlTemp,'fileCMD': 'saveFile'}, function(response)  {
+                                                        
+                                                        })
+                                    
+                                     }
+                                     //open 文件操作
+                                     var btn_open = document.getElementById('btn_open');
+                                     
+                                     btn_open.onclick = function(e){
+                                     tabClick('xml');
+                                     tabClick('blocks');
+                                     
+                                  //   btn_open.innerHTML = 'openClick';
+                 
+                                     
+                                     bridge.callHandler('testObjcCallback', {'data':'','fileCMD': 'openFile'}, function(response)  {
+                                                         tabClick('blocks');
+                                                        })
+                                     
+                                     
+                                     }
+                                     //编译 文件操作
+                                     var btn_compil = document.getElementById('btn_compile');
+                                     
+                                     btn_compil.onclick = function(e){
+                                     tabClick('arduino');
+                                     tabClick('blocks');
+                                     
+                                     var arduinoTextarea = document.getElementById('content_arduino');
+                                     var data_temp = arduinoTextarea.value;
+                                     //   btn_open.innerHTML = 'openClick';
+                                     bridge.callHandler('testObjcCallback', {'data':data_temp,'fileCMD': 'compileFile'}, function(response)  {
+                                                        
+                                                        })
+                                     
+                                     }
+
+
+                                    bridge.registerHandler('testJavascriptHandler', function(data, responseCallback){
+                                                        var data_string = data["greetingFromObjC"];
+                                                        xmlTemp = data_string;
+                                                var xmlTextarea = document.getElementById('content_blocks');
+
+                                                           
+                                                         xmlTextarea.value = data_string;
+                                                           
+                                                           tabClick('blocks');
+                                                           var xmlTextarea = document.getElementById('content_blocks');
+                                                           
+                                                           xmlTextarea.focus();
+                                                           
+                                                            })
+                            
+                                     })
+                                     
+    }
+
+
+</script>
+  <style>
+    html, body{height: 100%;}
+    body{background-color: #fff;font-family: "微软雅黑";margin: 0;overflow: hidden;}
+    h1 {font-weight: normal;font-size: 140%;margin-left: 5px;margin-right: 5px;}
+    dl{padding:0; margin:0;}
+    .clearfix:after{visibility: hidden;display: block;font-size: 0;content: " ";clear: both;height: 0;}
+    * html .clearfix{zoom:1;} /* IE6 */
+    *:first-child+html .clearfix{zoom:1;} /* IE7 */
+    .clear{height:0px;clear:both;overflow:hidden;display:block;_zoom:1;}
+    /* Tabs */
+    #tabRow{background: #fff;}
+    #tabRow td{vertical-align: middle; text-align: center; border-bottom: 1px solid #E1E7F0; }
+    #tabRow td:nth-child(1){border-right: 1px solid #242424;  border-bottom: 1px solid #1F2126;}
+    #tabRow td:nth-child(3){border-right: 1px solid #E9EDF4;}
+    #tabRow td:nth-child(4){border-right: 0;}
+    #tab_blocks{min-width: 50px;}
+    td#tab_Logo{vertical-align: middle; position: relative; padding:0 19px;background:#2A2E33 url("logo.png") no-repeat  10px center;}
+    .logoCon{width: 100%; height: 39px; border-bottom: 1px solid #31353A; position: absolute; top:0; left:0; }
+    td.tabon{background-color:#F7F8FA;padding:0px 19px;color: #fff;display: block;border:1px solid #E1E7F0;border-bottom: 0; border-top:0;}
+    td.taboff{cursor: pointer;padding: 0px 19px;border-bottom: 0;display: block;}
+    #tab_blocks{background-image: url("../../media/menu1.png"); background-repeat: no-repeat; background-position:center 4px;}
+    #tab_arduino{ min-width: 90px; background-image: url("../../media/menu2.png"); background-repeat: no-repeat; background-position:center 4px;}
+    .tabon p{color:#000;}
+    td p{display: block; font-size:10px;-webkit-margin-before: 0;
+    -webkit-margin-after: 0; padding-top:22px; line-height: 15px; color: #A5AFBA; }  
+    td.taboff:hover{background-color: #eee;}
+    td.tabmin{border-top-style: none !important;border-left-style: none !important;border-right-style: none !important;}
+    td.tabmax{border-top-style: none !important;border-left-style: none !important;border-right-style: none !important;width: 99%;text-align: right!important;}
+    table{border-collapse: collapse;margin: 0;padding: 0;border: none;}
+    td{padding: 0;vertical-align: top;}
+    .content{background: #fff;visibility: hidden;margin: 0;padding: 1ex;position: absolute;direction: ltr;border:0;outline: 0;}
+    pre.content{overflow: scroll;}
+    #content_blocks {padding: 0;}
+    .blocklySvg{border-top: none !important;}
+    #content_xml{resize: none;outline: none;border: none;font-family: monospace;overflow: scroll;}    
+    #toolBoxSlide{width: 171px; z-index:20;overflow-y:scroll;position: absolute; top:41px; left:0px; height: 100%; background: #242424;}
+    #toolBoxSlide dd{display: none;}
+    #toolBoxSlide dt{cursor: pointer; padding:8px 10px;clear: both;border-bottom: 1px solid #333; }
+    #toolBoxSlide dl{padding:0;white-space: nowrap; }
+    #toolBoxSlide .ico{display: block; float: left;background-image: url(../../media/ico.png); width: 16px; height: 20px; margin-right: 8px;}
+    #toolBoxSlide .text{float: left;color: #a2a2a1; height:20px; line-height: 20px;}
+    #toolBoxSlide .more{float: right;background: url(../../media/sprites.png) no-repeat; margin-top: 6px; background-position: -50px 0;width: 6px;height: 10px;}
+    #toolBoxSlide dl:nth-child(1) dt .ico{background-position: 0 1px;}
+    #toolBoxSlide dl:nth-child(2) dt .ico{background-position: 0 -19px;}
+    #toolBoxSlide dl:nth-child(3) dt .ico{background-position: 0 -39px;}
+    #toolBoxSlide dl:nth-child(4) dt  .ico{background-position: 0 -59px;}
+    #toolBoxSlide dl:nth-child(5) dt  .ico{background-position: 0 -79px;}
+    #toolBoxSlide dl:nth-child(6) dt  .ico{background-position: 0 -99px;}
+    #toolBoxSlide dl:nth-child(7) dt .ico{background-position: -20px 1px;}
+    #toolBoxSlide dl:nth-child(8) dt .ico{background-position: 0 -19px;}
+    #toolBoxSlide dl:nth-child(9) dt .ico{background-position: 0 -39px;}
+    #toolBoxSlide dl:nth-child(10) dt .ico{background-position: 0 -59px;}
+    #toolBoxSlide dl:nth-child(11) dt .ico{background-position: 0 -78px;}
+    #toolBoxSlide dl:nth-child(12) dt .ico{background-position: 0 1px;}
+    #toolBoxSlide .als{border-bottom: 1px solid #333;}
+    #toolBoxSlide .als div{padding:15px 10px; }
+    #toolBoxSlide .als  .more{display: none;}
+    #toolBoxSlide .als .ico{background-position: -20px 1px;}
+    #toolBoxSlide .als .text{color: #fff;}
+    #toolBoxSlide dl:nth-child(1).cur dt .ico{background-position: -20px 1px;}
+    #toolBoxSlide dl:nth-child(2).cur dt .ico{background-position: -20px -19px;}
+    #toolBoxSlide dl:nth-child(3).cur dt .ico{background-position: -20px -39px;}
+    #toolBoxSlide dl:nth-child(4).cur dt .ico{background-position: -20px -59px;}
+    #toolBoxSlide dl:nth-child(5).cur dt .ico{background-position: -20px -79px;}
+    #toolBoxSlide dl:nth-child(6).cur dt .ico{background-position: -20px -99px;}
+    #toolBoxSlide dl:nth-child(7).cur dt .ico{background-position: -20px 1px;}
+    #toolBoxSlide dl:nth-child(8).cur dt .ico{background-position: -20px -19px;}
+    #toolBoxSlide dl:nth-child(9).cur dt .ico{background-position: -20px -39px;}
+    #toolBoxSlide dl:nth-child(10).cur dt .ico{background-position: -20px -59px;}
+    #toolBoxSlide dl:nth-child(11).cur dt .ico{background-position: -20px -78px;}
+    #toolBoxSlide dl:nth-child(12).cur dt .ico{background-position: -20px 1px;}
+    #toolBoxSlide dl.cur dt{background: #313131; padding:15px 10px;}
+    #toolBoxSlide dl.cur dt .text{color: #fff;}
+    #toolBoxSlide dl.cur dt .more{ background-position: -58px 0;}
+    #toolBoxSlide dl:last-child{margin-bottom: 5px;}
+    .tdBtn{border-left: 1px solid #E9EDF4;vertical-align: middle!important;cursor:pointer; padding:0 0px;  height: 40px; line-height: 40px; }
+    .tdBtn p{color: #A5AFBA; width: 60px; }    
+    .btn1{background:url("../../media/nav1.png") no-repeat center 4px; }
+    .btn2{background:url("../../media/nav2.png") no-repeat center 4px;}
+    .btn3{background: url("../../media/nav3.png") no-repeat center 4px;}
+    .btn4{background:#3C9ADC url("../../media/nav4.png") no-repeat center 4px;border-bottom: 1px solid #2787CD!important; border-left: 1px solid #2787CD!important;}
+    .btn4 p{color: #fff;}    
+  </style>
+</head>
+<body onload="init()">
+  <table height="100%" width="100%">
+    <tr>
+      <td>
+        <table width="100%">
+          <tr id="tabRow" style="height:40px;">
+            <td id="tab_Logo"><div class="logoCon"></div></td>
+              <!--<td class="tabmin">&nbsp;</td>-->
+            <td id="tab_blocks" class="tabon" onclick="tabClick('blocks');slideToggle('block');"><p>图形编程</p></td>
+             <!-- <td class="tabmin">&nbsp;</td>-->
+            <td id="tab_arduino" class="taboff" onclick="tabClick('arduino');slideToggle('none');"><p>Arduino代码</p></td>
+            <td id="tab_xml" class="taboff" style="padding:0;"></td>
+            <td class="tabmax"></td>
+            <td id="btn_open" class="tdBtn btn1" ><p>打开</p><input type="file" id="load" style="display: none;"/></td>
+            <td class="tdBtn btn2" onclick="resetClick()"><p>重置</p></td>
+            <td id="btn_compile" class="tdBtn btn3" onclick="complieClick()"><p>编译</p></td>
+            <td id="btn_save" class="tdBtn btn4" ><p>保存</p></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td height="99%" id="content_area"></td>
+    </tr>
+  </table>
+  <div id="content_blocks" class="content"></div>
+  <textarea id="content_arduino" class="content" readonly wrap="off"></textarea>
+  <textarea id="content_xml" class="content" wrap="off"></textarea>
+  <xml id="toolbox"  style = "display:none">
+    <category  name="逻辑">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_null"></block>
+    </category>
+    <category name="控制">
+      <block type="base_delay">
+        <value name="DELAY_TIME">
+          <block type="math_number">
+            <field name="NUM">1000</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_for">
+        <value name="FROM">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="TO">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+    </category>
+    <category name="数学">
+      <block type="math_number"></block>
+      <block type="math_arithmetic"></block>
+      <block type="base_map">
+        <value name="DMAX">
+          <block type="math_number">
+            <field name="NUM">180</field>
+          </block>
+        </value>
+      </block>
+    </category>
+    <category name="文字">
+      <block type="text"></block>
+    </category>
+    <category name="变量" custom="VARIABLE"></category>
+    <category name="函数" custom="PROCEDURE"></category>
+    <category name="输入/输出">
+
+      <block type="inout_highlow"></block>
+      <block type="inout_digital_write"></block>
+      <block type="inout_digital_read"></block>
+      <block type="inout_analog_write">
+        <value name="NUM">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="inout_analog_read"></block>
+      <block type="serial_print">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="inout_tone">
+        <value name="NUM">
+          <block type="math_number">
+            <field name="NUM">440</field>
+          </block>
+        </value>
+      </block>
+      <block type="inout_notone"></block>
+      <block type="inout_buildin_led"></block>
+    </category>
+    <category name="伺服电机">
+      <block type="servo_move">
+        <value name="DEGREE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="servo_read_degrees"></block>
+    </category>
+    <category name="通用配件">
+      <block type="grove_led"></block>
+      <block type="grove_button"></block>
+      <block type="grove_relay"></block>
+      <block type="grove_tilt_switch"></block>
+      <block type="grove_piezo_buzzer"></block>
+      <block type="grove_pir_motion_sensor"></block>
+      <block type="grove_line_finder"></block>
+      <block type="grove_rgb_led"></block>
+      <block type="grove_ultrasonic_ranger"></block>
+	  <block type="grove_rotary_angle"></block>
+      <block type="grove_temporature_sensor"></block>
+      <block type="grove_sound_sensor"></block>
+      <block type="grove_thumb_joystick"></block>
+    </category>
+    <category name="LCD">
+      <block type="grove_serial_lcd_print">
+        <value name="TEXT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <value name="TEXT2">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <value name="DELAY_TIME">
+          <block type="math_number">
+            <field name="NUM">1000</field>
+          </block>
+        </value>
+      </block>
+      <block type="grove_serial_lcd_power"></block>
+      <block type="grove_serial_lcd_effect"></block>
+    </category>
+    <category name="马达">
+      <block type="grove_motor_shield"></block>
+      
+      
+      
+    </category>
+  </xml>
+</body>
+</html>
+

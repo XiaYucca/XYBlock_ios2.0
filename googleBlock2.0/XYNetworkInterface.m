@@ -73,8 +73,8 @@ static id sessionManager;
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeString = [NSString stringWithFormat:@"%.0f", a];
     
-//  NSLog(@"++++++++%ld""""""""\n", time(NULL));  // 这句也可以获得时间戳，跟上面一样，精确到秒
-//  NSLog(@"getTime:%@",timeString);
+  NSLog(@"++++++++%ld""""""""\n", time(NULL));  // 这句也可以获得时间戳，跟上面一样，精确到秒
+  NSLog(@"时间戳getTime:%@\n",timeString);
 
     return timeString;
 }
@@ -461,6 +461,8 @@ uploadTask = [manager
 
 -(networkingStatus)downLoad:(NSString *)file_hash savePath:(NSString *)filePath
 {
+    __block int state = 0;
+
     NSDictionary *parameters = [@{
                                   @"file":file_hash
                                   }copy];
@@ -476,19 +478,24 @@ uploadTask = [manager
         if (!dict) {
             NSLog(@"文件下载成功");
             [responseObject writeToFile:filePath options:NSDataWritingAtomic error:nil];
+            state = netStatusUploadSuccesed;
+            
 
         }
         else
         {
             NSLog(@"下载文件出错");
+            state = netStatusCompliFailued;
         }
         
         
         
     } failue:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
          NSLog(@"ERROR%@",error);
+        
+        state = netStatusCompliFailued;
     }];
-    return 1;
+    return state;
 }
 
 
