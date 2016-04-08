@@ -6,7 +6,7 @@
 //  Copyright © 2016年 ningBo Jiang. All rights reserved.
 //
 
-#define overAnimation 0.3
+#define overAnimation 0.5
 
 #import "XYSwiperCell.h"
 
@@ -30,6 +30,15 @@
 {
     CGAffineTransform orginTransform;
     CGAffineTransform endTransform;
+}
+
+
+-(void)setEnableSwiper:(BOOL)enableSwiper
+{
+    if (_enableSwiper != enableSwiper) {
+        _enableSwiper = enableSwiper;
+    
+    }
 }
 
 -(void)awakeFromNib {
@@ -58,9 +67,11 @@
     
     orginTransform = self.behandView.transform;
     endTransform = CGAffineTransformTranslate(orginTransform,-self.behandView.frame.size.width *overAnimation, 0);
-
     
+    self.enableSwiper = YES;
+
 }
+
 - (IBAction)cancelBtnClick:(id)sender {
     
     NSLog(@"按下了删除按钮");
@@ -137,14 +148,19 @@
 #pragma mark -gesture delegate
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    if ([gestureRecognizer class] == [UIPanGestureRecognizer class]) {
-        UIPanGestureRecognizer *g = (UIPanGestureRecognizer *)gestureRecognizer;
-        CGPoint point = [g velocityInView:self];
-        if (fabsf(point.x) > fabsf(point.y) ) {
-            return YES;
+    if (self.isEnableSwiper) {
+        if ([gestureRecognizer class] == [UIPanGestureRecognizer class]) {
+            UIPanGestureRecognizer *g = (UIPanGestureRecognizer *)gestureRecognizer;
+            CGPoint point = [g velocityInView:self];
+            if (fabsf((float)point.x) > fabsf((float)point.y)) {
+                return YES;
+            }
         }
+        return NO;
+    }else{
+        return NO;
     }
-    return NO;
+
 }
 -(void)XYSwiperCellEndGrag:(BOOL)animated
 {

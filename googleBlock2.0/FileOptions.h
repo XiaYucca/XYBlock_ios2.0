@@ -10,5 +10,6 @@
 
 @interface FileOptions : NSObject
 @property (nonatomic,copy)NSString *filedata;
+-(void)deleteFiles:(NSString *)fileName WithCompliment:(void (^)(bool successed))compliment;
 
 @end

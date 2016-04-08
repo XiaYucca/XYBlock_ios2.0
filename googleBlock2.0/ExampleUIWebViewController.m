@@ -26,7 +26,7 @@
 
 const NSString *cellID = @"cell";
 
-@interface ExampleUIWebViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate, MCSwipeTableViewCellDelegate>
+@interface ExampleUIWebViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIAlertViewDelegate, MCSwipeTableViewCellDelegate>
 @property WebViewJavascriptBridge* bridge;
 @property (nonatomic,strong)UIView *animateView;
 @property (nonatomic,copy)NSMutableArray *fileNames;
@@ -42,18 +42,26 @@ const NSString *cellID = @"cell";
 
 @property (nonatomic,strong)JSWebViewController *jsWebView;
 @property (nonatomic,weak)UIWebView *webView;
-@property (nonatomic ,strong)FileOptions* fileopetions ;
+@property (nonatomic ,strong)FileOptions* fileopetions;
 
 
 
 @end
 
 @implementation ExampleUIWebViewController
+{
+    id clickedSender;
+}
 
 -(void)viewDidLoad
 {
-    self.selectFileName = @"projectName";
+    self.selectFileName = @"project";
 }
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
  //   [self loadJSWebView:self.webView];
@@ -88,8 +96,9 @@ const NSString *cellID = @"cell";
     if (!_openFileNames) {
         _openFileNames = [[self loadFileNameDateFormLocaDesk] mutableCopy];
         if (!_openFileNames) {
-            _openFileNames = [@[]mutableCopy];
+            _openFileNames = [@[@"project"]mutableCopy];
         }
+        [self addObserver:self forKeyPath:@"openFileNames" options:NSKeyValueObservingOptionNew| NSKeyValueObservingOptionOld context:nil];
     }
     return _openFileNames;
 }
@@ -97,7 +106,7 @@ const NSString *cellID = @"cell";
 -(NSMutableArray *)fileNames
 {
     if (!_fileNames) {
-        _fileNames = [@[@"projectName"]mutableCopy];
+        _fileNames = [@[@"project"]mutableCopy];
     }
     return _fileNames;
 }
@@ -109,9 +118,18 @@ const NSString *cellID = @"cell";
     return _animateView;
 }
 
+-(FileOptions *)fileopetions
+{
+    if (!_fileopetions) {
+        _fileopetions = [[FileOptions alloc]init];
+    }
+    return _fileopetions;
+}
+
+
 -(void)LoadCustomView
 {
-    UIView *animareView = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width, 0,animateViewWith , self.view.frame.size.height)];
+    UIView *animareView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH, 0,animateViewWith , SCREEN_HEIGHT)];
     
     
     [animareView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:0.5]];
@@ -121,13 +139,13 @@ const NSString *cellID = @"cell";
     self.fileList = tableView;
     
     UIButton *btn_save = [[UIButton alloc]initWithFrame:CGRectMake(30, animareView.frame.size.height-30, 70, 30)];
-    [btn_save setTitle:@"save" forState:UIControlStateNormal];
+    [btn_save setTitle:@"确定" forState:UIControlStateNormal];
     
     [btn_save addTarget:self action:@selector(saveBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *btn_cansale = [[UIButton alloc]initWithFrame:CGRectMake(animareView.frame.size.width-30-50, animareView.frame.size.height-30, 70, 30)];
     
-    [btn_cansale setTitle:@"cancel" forState:UIControlStateNormal];
+    [btn_cansale setTitle:@"取消" forState:UIControlStateNormal];
     [btn_cansale addTarget:self action:@selector(saveBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     btn_cansale.tag = 20;
@@ -171,7 +189,7 @@ const NSString *cellID = @"cell";
     
     if (_bridge) { return; }
     
-    UIWebView * webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    UIWebView * webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
     
     [self.view addSubview:webView];
@@ -254,7 +272,7 @@ const NSString *cellID = @"cell";
 
 -(void)compileFile:(NSString *)data
 {
-    self.fileopetions  = [[FileOptions alloc]init];
+
     
     NSLog(@"uploaddata=++++++++++++++++%@",data);
     
@@ -330,11 +348,15 @@ const NSString *cellID = @"cell";
     if (self.isSaveState) {
         field.text = self.fileNames[indexPath.row];
         field.enabled = YES;
+        cell.enableSwiper = NO;
+        
+        cell.selected = NO;
     
     }else
     {
         field.text = self.openFileNames[indexPath.row];
         field.enabled = NO;
+        cell.enableSwiper = YES;
     }
 
     __weak id weakself = self;
@@ -350,19 +372,40 @@ const NSString *cellID = @"cell";
         }
         
     }];
+    __weak XYSwiperCell* weakCell = cell;
+    [cell XYSwiperCellGrag:^(CGPoint point) {
+        if (point.x>0) {
+            weakCell.bkView.backgroundColor = [UIColor clearColor];
+        }
+        else
+        {
+            weakCell.bkView.backgroundColor = [UIColor redColor];
+        }
+    }];
     
    return cell;
 }
+
+#pragma mark - deledate cell
+
 -(void)deleateCell:(id)sender
 {
     NSString *string = [NSString stringWithFormat:@"是否删除%@?",((XYSwiperCell*)sender).textField.text];
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"提示" message:string preferredStyle:UIAlertControllerStyleAlert];
     
+    [self deleteAlerView:string cell:sender];
+  /*   UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"提示" message:string preferredStyle:UIAlertControllerStyleAlert];
+    
+  
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         XYSwiperCell *cell = sender;
         NSIndexPath *cellIndex = [self.fileList indexPathForCell:cell];
-        [self.openFileNames removeObjectAtIndex:cellIndex.row];
+       
+     // [self.openFileNames removeObjectAtIndex:cellIndex.row];
+        
+        [self removeOpenFileNamesAtIndexes:cellIndex];
+       
+        
         
         [self.fileList reloadData];
         }];
@@ -374,12 +417,66 @@ const NSString *cellID = @"cell";
     [alertC addAction:actionBluth];
     
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertC animated:NO completion:nil];
+  
+  */
     
    
     
  //   NSLog(@"cell  ------ <<>\n%@\n index ---- %@",cell,cellIndex);
     
 }
+
+-(void)deleteAlerView:(NSString *)message cell:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除", nil];
+    alert.tag = 1;
+    [alert show];
+    clickedSender = sender;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"buttonIndex %i",buttonIndex);
+    if (alertView.tag == 1) {
+        if (buttonIndex == 1) {
+//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您的设备系统为ios7, 目前支持ios8及以上系统,需要适配吗?" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:@"了解", nil];
+//            alert.tag = 3;
+            
+//            [alert show];
+            
+            
+            XYSwiperCell *cell = clickedSender;
+            NSIndexPath *cellIndex = [self.fileList indexPathForCell:cell];
+            
+            // [self.openFileNames removeObjectAtIndex:cellIndex.row];
+            
+            [self removeOpenFileNamesAtIndexes:cellIndex];
+            
+            
+            
+            [self.fileList reloadData];
+        }
+    }
+   
+    
+    if(alertView.tag == 3)
+    {
+        if (buttonIndex == 1) {
+           
+//            1.Map    http://maps.google.com/maps?q=Shanghai
+//            2.Email  mailto://myname@google.com
+//            3.Tel    tel://10086
+//            4.Msg    sms://10086
+            
+            NSString *appString =  @"http://alsRobot.cn";
+          
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appString]];
+        }
+        NSLog(@"");
+    }
+}
+
+
 
 -(void) deselectRowWith:(XYSwiperCell *)cell animated:(BOOL)animate
 {
@@ -427,6 +524,9 @@ const NSString *cellID = @"cell";
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     self.selectFileName = [textField.text copy];
+    
+  //  [self.openFileNames addObject:self.selectFileName];
+    
     [self uploadFileNameData];
     return YES;
 }
@@ -454,8 +554,6 @@ const NSString *cellID = @"cell";
         }else
         {
         self.selectFileName = [textField.text copy];
-        
-     
         [textField resignFirstResponder];
         [textField endEditing:YES];
         return YES;
@@ -564,6 +662,7 @@ const NSString *cellID = @"cell";
     path = [NSString stringWithFormat:@"%@/%@",path,fileName];
 
     NSLog(@"savePath%@",path);
+    
     [strData writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
     if(![self.openFileNames containsObject:fileName])
@@ -604,15 +703,17 @@ const NSString *cellID = @"cell";
     [KVNProgress appearance].errorColor = [UIColor darkGrayColor];
     [KVNProgress appearance].circleSize = 75.0f;
     [KVNProgress appearance].lineWidth = 2.0f;
+    
+    
+    
+    
 }
 - (IBAction)show
 {
  
     [KVNProgress show];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-    
-        [KVNProgress dismiss];
+        [KVNProgress showErrorWithParameters:@{KVNProgressViewParameterStatus:@"网络连接失败"}];
     });
 }
 
@@ -636,6 +737,34 @@ const NSString *cellID = @"cell";
 {
     NSString *path =  [NSString stringWithFormat:@"%@/fileList.plist",[self pathForDocument]];
     return [NSArray arrayWithContentsOfFile:path];
+}
+
+-(void)removeOpenFileNamesAtIndexes:(NSIndexPath *)indexes 
+{
+  [[self mutableArrayValueForKey:@"openFileNames"] removeObjectAtIndex:indexes.row];
+}
+
+
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    NSLog(@"%@",self.openFileNames);
+    if ([keyPath isEqualToString:@"openFileNames"]) {
+        NSLog(@"监听者开始工作了 删除了文件 %@ \n %@  \n %@contex\n fileOptions%@",object,change[@"old"],context,self.fileopetions);
+        
+        NSString *fileName  = [(NSArray *)change[@"old"]firstObject] ;
+        
+        [self.fileopetions deleteFiles:fileName WithCompliment:nil];
+        [self uploadFileNameData];
+        
+    }
+    
+ 
+}
+
+-(void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"openFileNames"];
 }
 
 @end

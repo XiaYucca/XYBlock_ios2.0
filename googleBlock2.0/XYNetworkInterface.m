@@ -25,12 +25,12 @@
 const NSString *secriteKey = @"cf0bdfe00e9332d64bfbab9d760e309b0fb46d1a";
 //const NSString *baseUrlString = @"http://www.robotbase.cn/arduino";
 
-const NSString *baseUrlString = @"http://arduino.alsrobot.cn/";
-const NSString *loginUrl =  @"http://arduino.alsrobot.cn/login";
+const NSString *baseUrlString = @"http://arduinoapi.alsrobot.cn/";
+const NSString *loginUrl =  @"http://arduinoapi.alsrobot.cn/login";
 
-const NSString *uploadUrl = @"http://arduino.alsrobot.cn/upload";
-const NSString *downloadUrl = @"http://arduino.alsrobot.cn/download";
-const NSString *compileUrl = @"http://arduino.alsrobot.cn/compile";
+const NSString *uploadUrl = @"http://arduinoapi.alsrobot.cn/upload";
+const NSString *downloadUrl = @"http://arduinoapi.alsrobot.cn/download";
+const NSString *compileUrl = @"http://arduinoapi.alsrobot.cn/compile";
 
 
 const NSString *statusParametersError = @"-1";
@@ -446,10 +446,14 @@ uploadTask = [manager
     [netWork XYNetworkingGet:compileUrl parameters:parameters success:^(id  _Nullable responseObject) {
 //        
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"compile ---%@\n",dict);
-        if (dict[@"status"]) {
+        NSLog(@"compile >>>>>>>>>>%@\n",dict[@"status"]);
+        if ( [dict[@"status"]floatValue]>0) {
             NSLog(@"编译文件成功\n");
             !complliment?:complliment(YES);
+        }else
+        {
+            !complliment?:complliment(NO);
+
         }
     } failue:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"ERROR%@",error);
@@ -487,9 +491,6 @@ uploadTask = [manager
             NSLog(@"下载文件出错");
             state = netStatusCompliFailued;
         }
-        
-        
-        
     } failue:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
          NSLog(@"ERROR%@",error);
         

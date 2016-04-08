@@ -16,6 +16,7 @@
 		C1405C461C9661E0006FE66D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1405C451C9661E0006FE66D /* WebKit.framework */; };
 		C1405C491C96A345006FE66D /* ExampleUIWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1405C481C96A345006FE66D /* ExampleUIWebViewController.m */; };
 		C1405C4B1C96AC78006FE66D /* ExampleApp.html in Resources */ = {isa = PBXBuildFile; fileRef = C1405C4A1C96AC78006FE66D /* ExampleApp.html */; };
+		C14571E11CB5FEEE004256F0 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = C14571E01CB5FEEE004256F0 /* Device.m */; };
 		C14E6DA81C883FE80081F523 /* XYNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */; };
 		C14E6DB71C88403D0081F523 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C14E6DAB1C88403D0081F523 /* AFHTTPSessionManager.m */; };
 		C14E6DB81C88403D0081F523 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C14E6DAE1C88403D0081F523 /* AFNetworkReachabilityManager.m */; };
@@ -40,6 +41,10 @@
 		C1B1A43D1CAD314600BE4023 /* UIImage+KVNEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B1A43A1CAD314600BE4023 /* UIImage+KVNEmpty.m */; };
 		C1B1A43E1CAD314600BE4023 /* UIImage+KVNImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B1A43C1CAD314600BE4023 /* UIImage+KVNImageEffects.m */; };
 		C1B1A4401CAD316D00BE4023 /* KVNProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1B1A43F1CAD316D00BE4023 /* KVNProgressView.xib */; };
+		C1B1A4451CAE10B700BE4023 /* SetMask.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1B1A4421CAE10B700BE4023 /* SetMask.xib */; };
+		C1B1A4461CAE10B700BE4023 /* SetMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B1A4441CAE10B700BE4023 /* SetMaskView.m */; };
+		C1B1A44A1CAE15F200BE4023 /* SerialGATT.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B1A4491CAE15F200BE4023 /* SerialGATT.m */; };
+		C1B1A4501CAE1B4A00BE4023 /* XYSerialManage.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B1A44F1CAE1B4A00BE4023 /* XYSerialManage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,8 +81,11 @@
 		C1405C471C96A345006FE66D /* ExampleUIWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleUIWebViewController.h; sourceTree = "<group>"; };
 		C1405C481C96A345006FE66D /* ExampleUIWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleUIWebViewController.m; sourceTree = "<group>"; };
 		C1405C4A1C96AC78006FE66D /* ExampleApp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ExampleApp.html; sourceTree = "<group>"; };
-		C14E6DA61C883FE80081F523 /* XYNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYNetworkInterface.h; sourceTree = "<group>"; };
-		C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYNetworkInterface.m; sourceTree = "<group>"; };
+		C14571DF1CB5FEEE004256F0 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		C14571E01CB5FEEE004256F0 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		C14571E31CB603E9004256F0 /* googleBlock2.0.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = googleBlock2.0.pch; sourceTree = "<group>"; };
+		C14E6DA61C883FE80081F523 /* XYNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYNetworkInterface.h; path = googleBlock2.0/XYNetworkInterface.h; sourceTree = "<group>"; };
+		C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYNetworkInterface.m; path = googleBlock2.0/XYNetworkInterface.m; sourceTree = "<group>"; };
 		C14E6DAA1C88403D0081F523 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		C14E6DAB1C88403D0081F523 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		C14E6DAC1C88403D0081F523 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -121,6 +129,13 @@
 		C1B1A43B1CAD314600BE4023 /* UIImage+KVNImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KVNImageEffects.h"; sourceTree = "<group>"; };
 		C1B1A43C1CAD314600BE4023 /* UIImage+KVNImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KVNImageEffects.m"; sourceTree = "<group>"; };
 		C1B1A43F1CAD316D00BE4023 /* KVNProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KVNProgressView.xib; sourceTree = "<group>"; };
+		C1B1A4421CAE10B700BE4023 /* SetMask.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetMask.xib; sourceTree = "<group>"; };
+		C1B1A4431CAE10B700BE4023 /* SetMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetMaskView.h; sourceTree = "<group>"; };
+		C1B1A4441CAE10B700BE4023 /* SetMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetMaskView.m; sourceTree = "<group>"; };
+		C1B1A4481CAE15F200BE4023 /* SerialGATT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SerialGATT.h; path = googleBlock2.0/SerialGATT.h; sourceTree = "<group>"; };
+		C1B1A4491CAE15F200BE4023 /* SerialGATT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SerialGATT.m; path = googleBlock2.0/SerialGATT.m; sourceTree = "<group>"; };
+		C1B1A44E1CAE1B4A00BE4023 /* XYSerialManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSerialManage.h; sourceTree = "<group>"; };
+		C1B1A44F1CAE1B4A00BE4023 /* XYSerialManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSerialManage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,12 +176,15 @@
 				C1405C3E1C9656B7006FE66D /* WKWebViewJavascriptBridge.h */,
 				C1405C3F1C9656B7006FE66D /* WKWebViewJavascriptBridge.m */,
 			);
-			path = WebViewJavascriptBridge;
+			name = WebViewJavascriptBridge;
+			path = googleBlock2.0/WebViewJavascriptBridge;
 			sourceTree = "<group>";
 		};
 		C1405C441C9661B5006FE66D /* FrameWorks */ = {
 			isa = PBXGroup;
 			children = (
+				C14E6DA91C88403D0081F523 /* AFNetworking */,
+				C1405C371C9656B7006FE66D /* WebViewJavascriptBridge */,
 				C1405C451C9661E0006FE66D /* WebKit.framework */,
 			);
 			name = FrameWorks;
@@ -190,7 +208,8 @@
 				C14E6DB51C88403D0081F523 /* AFURLSessionManager.h */,
 				C14E6DB61C88403D0081F523 /* AFURLSessionManager.m */,
 			);
-			path = AFNetworking;
+			name = AFNetworking;
+			path = googleBlock2.0/AFNetworking;
 			sourceTree = "<group>";
 		};
 		C16033DB1CACED0C00D6BA9B /* MainViewController */ = {
@@ -205,13 +224,13 @@
 		C16033DC1CACED5100D6BA9B /* MinorViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C1B1A4411CAD317500BE4023 /* HUD */,
-				C14E6DA61C883FE80081F523 /* XYNetworkInterface.h */,
-				C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */,
-				C16033D61CACECFE00D6BA9B /* XYSwiperCell.h */,
-				C16033D71CACECFE00D6BA9B /* XYSwiperCell.m */,
 				C19A1B9D1CAA89C3006CD176 /* FileOptions.h */,
 				C19A1B9E1CAA89C3006CD176 /* FileOptions.m */,
+				C1B1A4421CAE10B700BE4023 /* SetMask.xib */,
+				C1B1A4431CAE10B700BE4023 /* SetMaskView.h */,
+				C1B1A4441CAE10B700BE4023 /* SetMaskView.m */,
+				C16033D61CACECFE00D6BA9B /* XYSwiperCell.h */,
+				C16033D71CACECFE00D6BA9B /* XYSwiperCell.m */,
 				C16033D81CACECFE00D6BA9B /* XYSwiperCell.xib */,
 			);
 			name = MinorViewController;
@@ -253,21 +272,14 @@
 		C18E0E841C7AFD440097A842 /* googleBlock2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				C1B1A4471CAE154C00BE4023 /* HTMLSource */,
 				C1405C441C9661B5006FE66D /* FrameWorks */,
-				C1405C371C9656B7006FE66D /* WebViewJavascriptBridge */,
-				C14E6DA91C88403D0081F523 /* AFNetworking */,
-				C150431C1C9F918D00F42905 /* BlocklyDuino-pages */,
-				C18E0E881C7AFD440097A842 /* AppDelegate.h */,
-				C18E0EB81C7AFD720097A842 /* BlocklyDuino-gh-pages */,
-				C18E0E891C7AFD440097A842 /* AppDelegate.m */,
+				C1B1A44B1CAE160000BE4023 /* MyLib */,
 				C16033DB1CACED0C00D6BA9B /* MainViewController */,
 				C16033DC1CACED5100D6BA9B /* MinorViewController */,
 				C16033DD1CACED7300D6BA9B /* TestviewController */,
-				C18E0E8E1C7AFD440097A842 /* Main.storyboard */,
 				C1405C4A1C96AC78006FE66D /* ExampleApp.html */,
-				C18E0E911C7AFD440097A842 /* Assets.xcassets */,
-				C18E0E931C7AFD440097A842 /* LaunchScreen.storyboard */,
-				C18E0E961C7AFD440097A842 /* Info.plist */,
+				C1B1A44C1CAE169C00BE4023 /* Others */,
 				C18E0E851C7AFD440097A842 /* Supporting Files */,
 			);
 			path = googleBlock2.0;
@@ -276,7 +288,9 @@
 		C18E0E851C7AFD440097A842 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C18E0E861C7AFD440097A842 /* main.m */,
+				C18E0E961C7AFD440097A842 /* Info.plist */,
+				C14571E31CB603E9004256F0 /* googleBlock2.0.pch */,
+				C18E0E911C7AFD440097A842 /* Assets.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -319,6 +333,45 @@
 				C1B1A4361CAD310000BE4023 /* KVNProgress.m */,
 			);
 			name = HUD;
+			path = googleBlock2.0;
+			sourceTree = "<group>";
+		};
+		C1B1A4471CAE154C00BE4023 /* HTMLSource */ = {
+			isa = PBXGroup;
+			children = (
+				C18E0EB81C7AFD720097A842 /* BlocklyDuino-gh-pages */,
+				C150431C1C9F918D00F42905 /* BlocklyDuino-pages */,
+			);
+			name = HTMLSource;
+			sourceTree = "<group>";
+		};
+		C1B1A44B1CAE160000BE4023 /* MyLib */ = {
+			isa = PBXGroup;
+			children = (
+				C14571DF1CB5FEEE004256F0 /* Device.h */,
+				C14571E01CB5FEEE004256F0 /* Device.m */,
+				C14E6DA61C883FE80081F523 /* XYNetworkInterface.h */,
+				C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */,
+				C1B1A4411CAD317500BE4023 /* HUD */,
+				C1B1A4481CAE15F200BE4023 /* SerialGATT.h */,
+				C1B1A4491CAE15F200BE4023 /* SerialGATT.m */,
+				C1B1A44E1CAE1B4A00BE4023 /* XYSerialManage.h */,
+				C1B1A44F1CAE1B4A00BE4023 /* XYSerialManage.m */,
+			);
+			name = MyLib;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		C1B1A44C1CAE169C00BE4023 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				C18E0E861C7AFD440097A842 /* main.m */,
+				C18E0E891C7AFD440097A842 /* AppDelegate.m */,
+				C18E0E881C7AFD440097A842 /* AppDelegate.h */,
+				C18E0E931C7AFD440097A842 /* LaunchScreen.storyboard */,
+				C18E0E8E1C7AFD440097A842 /* Main.storyboard */,
+			);
+			name = Others;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,6 +441,7 @@
 				TargetAttributes = {
 					C18E0E811C7AFD440097A842 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 7QBZV3YGDE;
 					};
 					C18E0E9A1C7AFD440097A842 = {
 						CreatedOnToolsVersion = 7.2;
@@ -431,6 +485,7 @@
 				C150431D1C9F918D00F42905 /* BlocklyDuino-pages in Resources */,
 				C18E0E921C7AFD440097A842 /* Assets.xcassets in Resources */,
 				C18E0E901C7AFD440097A842 /* Main.storyboard in Resources */,
+				C1B1A4451CAE10B700BE4023 /* SetMask.xib in Resources */,
 				C16033DA1CACECFE00D6BA9B /* XYSwiperCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,10 +517,13 @@
 				C18E0E8D1C7AFD440097A842 /* JSWebViewController.m in Sources */,
 				C19A1B9F1CAA89C3006CD176 /* FileOptions.m in Sources */,
 				C10570E11CAB6B0800A37C0B /* JZSwipeCell.m in Sources */,
+				C1B1A4461CAE10B700BE4023 /* SetMaskView.m in Sources */,
+				C1B1A44A1CAE15F200BE4023 /* SerialGATT.m in Sources */,
 				C1405C401C9656B7006FE66D /* WebViewJavascriptBridge.m in Sources */,
 				C18E0E8A1C7AFD440097A842 /* AppDelegate.m in Sources */,
 				C14E6DB71C88403D0081F523 /* AFHTTPSessionManager.m in Sources */,
 				C16033D91CACECFE00D6BA9B /* XYSwiperCell.m in Sources */,
+				C1B1A4501CAE1B4A00BE4023 /* XYSerialManage.m in Sources */,
 				C14E6DBC1C88403D0081F523 /* AFURLSessionManager.m in Sources */,
 				C18E0E871C7AFD440097A842 /* main.m in Sources */,
 				C1B1A43E1CAD314600BE4023 /* UIImage+KVNImageEffects.m in Sources */,
@@ -476,6 +534,7 @@
 				C14E6DA81C883FE80081F523 /* XYNetworkInterface.m in Sources */,
 				C10570E71CAB7FC600A37C0B /* MCSwipeTableViewCell.m in Sources */,
 				C14E6DBA1C88403D0081F523 /* AFURLRequestSerialization.m in Sources */,
+				C14571E11CB5FEEE004256F0 /* Device.m in Sources */,
 				C1405C431C9656B7006FE66D /* WKWebViewJavascriptBridge.m in Sources */,
 				C1405C491C96A345006FE66D /* ExampleUIWebViewController.m in Sources */,
 			);
@@ -558,6 +617,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/googleBlock2.0/googleBlock2.0.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -599,6 +660,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/googleBlock2.0/googleBlock2.0.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -616,11 +679,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/googleBlock2.0/googleBlock2.0.pch";
 				INFOPLIST_FILE = googleBlock2.0/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alsrobort.rainPoll.googleBlock2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -628,11 +697,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/googleBlock2.0/googleBlock2.0.pch";
 				INFOPLIST_FILE = googleBlock2.0/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alsrobort.rainPoll.googleBlock2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

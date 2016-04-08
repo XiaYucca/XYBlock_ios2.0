@@ -107,9 +107,9 @@ function renderContent() {
   // Initialize the pane.
   if (content.id == 'content_blocks') {
 
-    var xmlTextarea = document.getElementById('content_blocks');
-    xmlTextarea.focus();
-    Blockly.mainWorkspace.render();
+  //  var xmlTextarea = document.getElementById('content_blocks');
+  //  xmlTextarea.focus();
+  //  Blockly.mainWorkspace.render();
 
   } else if (content.id == 'content_xml') {
     var xmlTextarea = document.getElementById('content_xml');
@@ -244,8 +244,7 @@ function init() {
                                      
                                      /* Initialize your app here */
                                      
-                                     
-                                     var btn_save = document.getElementById('btn_save');
+                                    var btn_save = document.getElementById('btn_save');
                                      
                                      btn_save.onclick = function(e){
                                      
