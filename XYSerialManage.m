@@ -114,8 +114,7 @@
     [alert addAction:action];
     
    [[[UIApplication sharedApplication]keyWindow].rootViewController presentViewController:alert animated:YES completion:nil];
-    
-   // self.stateImageView.image = [UIImage imageNamed:@"tishi1"];
+       // 
 }
 
 -(void)serialGATTCharValueUpdated:(NSString *)UUID value:(NSData *)data
