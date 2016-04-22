@@ -23,14 +23,14 @@
 
 //服务器密钥
 const NSString *secriteKey = @"cf0bdfe00e9332d64bfbab9d760e309b0fb46d1a";
-//const NSString *baseUrlString = @"http://www.robotbase.cn/arduino";
+//const NSString *baseUrlString = @"http://arduinoapi.alsrobot.cn/";
 
 const NSString *baseUrlString = @"http://arduinoapi.alsrobot.cn/";
-const NSString *loginUrl =  @"http://arduinoapi.alsrobot.cn/login";
+const NSString *loginUrl =  @"http://arduinoapi.alsrobot.cn/ident/login";
 
-const NSString *uploadUrl = @"http://arduinoapi.alsrobot.cn/upload";
-const NSString *downloadUrl = @"http://arduinoapi.alsrobot.cn/download";
-const NSString *compileUrl = @"http://arduinoapi.alsrobot.cn/compile";
+const NSString *uploadUrl = @"http://arduinoapi.alsrobot.cn/upload/file";
+const NSString *downloadUrl = @"http://arduinoapi.alsrobot.cn/handle/download";
+const NSString *compileUrl = @"http://arduinoapi.alsrobot.cn/handle/compile";
 
 
 const NSString *statusParametersError = @"-1";
@@ -479,13 +479,16 @@ uploadTask = [manager
         
        NSLog(@"down ---dict%@",dict);
        
-        if (!dict) {
+        if (dict[@"status"]) {
             NSLog(@"文件下载成功");
-            [responseObject writeToFile:filePath options:NSDataWritingAtomic error:nil];
-            state = netStatusUploadSuccesed;
+            NSDictionary *strdata = dict[@"obj"];
             
-
+            NSLog(@"file data ---%@",strdata[@"content"]);
+            
+            [strdata[@"content"] writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+            state = netStatusUploadSuccesed;
         }
+        
         else
         {
             NSLog(@"下载文件出错");

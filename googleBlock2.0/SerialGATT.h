@@ -61,13 +61,16 @@
 #pragma mark - Methods for controlling the BLKSoft Sensor
 -(void) setup; //controller setup
 
--(int)  findBLKSoftPeripherals:(int)timeout;
+-(int)  findBLKSoftPeripherals:(float)timeout;
 -(void) scanTimer: (NSTimer *)timer;
 
 -(void) connect: (CBPeripheral *)peripheral;
 -(void) disconnect: (CBPeripheral *)peripheral;
 
 -(void) write:(CBPeripheral *)peripheral data:(NSData *)data;
+
+-(void) writeWithResponse:(CBPeripheral *)peripheral data:(NSData *)data response:(void(^)(BOOL success))response;
+
 -(void) read:(CBPeripheral *)peripheral;
 -(void) notify:(CBPeripheral *)peripheral on:(BOOL)on;
 

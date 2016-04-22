@@ -13,7 +13,6 @@
 
 @implementation Device
 
-
 //-(CGSize) getScreenSize {
 //        CGSize screenSize = [UIScreen mainScreen].bounds.size;
 //    if ((NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1) &&
@@ -23,6 +22,7 @@
 //    return screenSize;
 //}
 //
+
 CGSize getDevieceScreenSize()
 {
     CGSize screenSize = [UIScreen mainScreen].bounds.size;

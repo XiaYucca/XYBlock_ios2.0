@@ -16,15 +16,65 @@
 //@property (nonatomic, copy)NSMutableArray *discoverPeripheral;
 //@property (nonatomic, assign)BOOL autoConnect;
 //@property (strong ,nonatomic) SerialGATT *serial;
-//@property (strong ,nonatomic)NSTimer *scanTimer;
+@property (nonatomic, assign)BOOL autoConnect;
+@property (strong ,nonatomic)NSTimer *scanTimer;
 @property (nonatomic,copy) void(^changlePeripherals)(NSArray * peripherals);
 
+@property (nonatomic,copy) void(^connectResponse)(bool isSuccessed,CBPeripheral *peripheral);
+@property (nonatomic,copy) void(^misConnectCallback)(CBPeripheral *peripheral);
+@property (nonatomic,copy) void(^findedPeripheralcallBack)(CBPeripheral *peripheral , NSNumber *RSSI);
+@property (nonatomic,copy) void(^updteValue)(CBPeripheral *peripheral , NSData *data);
+
+@property (nonatomic,copy) void(^autoConnectCallBack)(CBPeripheral *peripheral);
+
+
+ 
 @end
 
 @implementation XYSerialManage
+{
+    float autoConnectDistance;
+    bool timeOutFlag;
+}
 
 //-(void)setBtnRediex:(CGFloat)
 #pragma mark - serialDelegate
+
+/*
+ 
+ -(void)connect:(CBPeripheral *)peripheral response:(void(^)(bool isSuccessed))response;
+ -(void)misConnect:(void(^)(CBPeripheral *peripheral))callback;
+ -(void)finedPeripheral:(void(^)(CBPeripheral *peripheral , NSNumber *RSSI))callBack;
+ -(void)disConnectPeripheral:(CBPeripheral *)peripheral ;
+ 
+ -(void)writeData:(NSData *)data;
+ 
+ -(void)peripheralValueChangle:(void(^)(CBPeripheral *peripheral , NSData *data))updateValue;
+ 
+ */
+
+-(void)connect:(CBPeripheral *)peripheral response:(void (^)(bool, CBPeripheral *))response
+{
+    self.connectResponse = response;
+}
+
+-(void)misConnect:(void (^)(CBPeripheral *))callback
+{
+    self.misConnectCallback = callback;
+}
+-(void)finedPeripheral:(void (^)(CBPeripheral *, NSNumber *))callBack
+{
+    self.findedPeripheralcallBack = callBack;
+}
+
+-(void)peripheralValueChangle:(void (^)(CBPeripheral *, NSData *))updateValue
+{
+    self.updteValue = updateValue;
+}
+-(void)disConnectPeripheral:(CBPeripheral *)peripheral
+{
+    [self.serial disconnect:peripheral];
+}
 
 -(NSMutableArray *)discoverPeripheral
 {
@@ -32,7 +82,6 @@
         _discoverPeripheral = [@[]mutableCopy];
  
     [self addObserver:self forKeyPath:@"discoverPeripheral" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-    
     }
     return _discoverPeripheral;
 }
@@ -40,8 +89,7 @@
 -(instancetype)init
 {
     if (self = [super init]) {
-        
-[self serialSetUp];
+        [self serialSetUp];
     }
     
     return self;
@@ -75,52 +123,64 @@
 
 -(void) peripheralFound:(CBPeripheral *)peripheral
 {
-    //    NSLog(@"array --->%@",peripheral);
+        NSLog(@"array --->%@",peripheral);
     //   [self.discoverPeripheral addObject:peripheral];
     if (![self.discoverPeripheral containsObject:peripheral]) {
         
         [[self mutableArrayValueForKey:@"discoverPeripheral"] addObject:peripheral];
-    }
+        
+        }
 }
 
 -(void)peripheralFound:(CBPeripheral *)peripheral andRSSI:(NSNumber *)RSSI
 {
     NSLog(@"peripheral-->%@  //// %d  autoConnect****%@",peripheral, RSSI.intValue,[NSString stringWithFormat:@"%i", self.autoConnect]);
+
+    ! self.findedPeripheralcallBack ? : self.findedPeripheralcallBack(peripheral,RSSI);
     
-    if (RSSI.intValue > -50 && self.autoConnect) {
+    if (RSSI.intValue > autoConnectDistance && self.autoConnect) {
         //  self.serial.activePeripheral = peripheral;
-        [self unenableAutoScaning];
         [self.serial.manager stopScan];
         [self.serial connect:peripheral];
+        
+        timeOutFlag = NO;
+    
     }
     
 }
 - (void) periphereDidConnect:(CBPeripheral *)peripheral
 {
-    
-  //  self.stateImageView.image = [UIImage imageNamed:@"tishi2"];
-    
+    ! self.connectResponse ? :self.connectResponse(YES,peripheral);
+    if (self.autoConnect && self.autoConnectCallBack) {
+        self.autoConnectCallBack (peripheral);
+    }
+    [self unenableAutoScaning];
 }
+
+
 - (void) peripheralMissConnect:(CBPeripheral *)peripheral
 {
+    ! self.misConnectCallback ? : self.misConnectCallback(peripheral);
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"蓝牙断开连接" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"好的" style:UIPreviewActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    }];
-    
-    [[alert.view superview]bringSubviewToFront:alert.view];
-    
-    [alert addAction:action];
-    
-   [[[UIApplication sharedApplication]keyWindow].rootViewController presentViewController:alert animated:YES completion:nil];
-       // 
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"蓝牙断开连接" preferredStyle:UIAlertControllerStyleAlert];
+//    
+//    UIAlertAction *action = [UIAlertAction actionWithTitle:@"好的" style:UIPreviewActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//    }];
+//    
+//    [[alert.view superview]bringSubviewToFront:alert.view];
+//    
+//    [alert addAction:action];
+//    
+//   [[[UIApplication sharedApplication]keyWindow].rootViewController presentViewController:alert animated:YES completion:nil];
+       //
 }
 
 -(void)serialGATTCharValueUpdated:(NSString *)UUID value:(NSData *)data
 {
     NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"收到的数据有%@",str );
+    
+    !self.updteValue? : self.updteValue(self.serial.activePeripheral,data);
 }
 
 
@@ -139,7 +199,7 @@
 
 
 // scan peripher onece time
--(void)blueToothScaning:(int)timerOut
+-(void)blueToothScaning:(float)timerOut
 {
     
     [self.serial.manager stopScan];
@@ -161,17 +221,32 @@
 }
 
 
--(void)blueToothAutoScaning:(float)interval withTimeOut:(int)timeOut
+-(void)blueToothAutoScaning:(float)interval withTimeOut:(float)timeOut autoConnectDistance:(CGFloat)distance didConnected:(void (^)(CBPeripheral *peripheral))callBack timeOutCallback:(void (^)())timeOutCallback
 {
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(autoscaning:) userInfo:[NSNumber numberWithInt:interval] repeats:YES];
+    self.autoConnect = YES;
+    timeOutFlag = YES;
+    
+    autoConnectDistance = distance;
+    
+    self.autoConnectCallBack = callBack;
+    
+   
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeOut * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self unenableAutoScaning];
         
+        if (timeOutFlag)
+        {
+        !timeOutCallback ? : timeOutCallback();
+            NSLog(@"连接蓝牙超时");
+        }
+        
     });
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:interval+0.2 target:self selector:@selector(autoscaning:) userInfo:[NSNumber numberWithInt:interval] repeats:YES];
+    
     self.scanTimer = timer;
-    self.autoConnect = YES;
 }
 
 -(void)autoscaning:(NSTimer *)timer
@@ -201,10 +276,15 @@
     self.serial = serial;
 }
 
--(void)sendData:(NSData *)data
+-(void)writeData:(NSData *)data
 {
     [self.serial write:self.serial.activePeripheral data:data];
 }
+-(void)writeDataWithResponse:(NSData *)data response:(void (^)(BOOL))response
+{
+    [self.serial writeWithResponse:self.serial.activePeripheral data:data response:response];
+}
+
 
 -(void)changleDiscoverPeripheral:(void(^)(NSArray *peripherals))discoverPeripherals
 {
@@ -225,11 +305,11 @@
             
             NSMutableArray *perM = [@[]mutableCopy];
             [self.discoverPeripheral enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                CBPeripheral *per = obj;
-                ! per.name ?:[perM addObject:per.name];
+                CBPeripheral *pers = obj;
+                ! pers.name ?:[perM addObject:pers];
             }];
           //  weakSelf.setMask.dataSource = [perM copy];
-            !self.discoverPeripheral? : self.changlePeripherals([perM copy]);
+            !self.changlePeripherals? : self.changlePeripherals([perM copy]);
         }
         //       else
         //        {

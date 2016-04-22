@@ -346,7 +346,7 @@ const NSString *cellID = @"cell";
 
     field.textColor = [UIColor whiteColor];
     if (self.isSaveState) {
-        field.text = self.fileNames[indexPath.row];
+        field.placeholder = self.fileNames[indexPath.row];
         field.enabled = YES;
         cell.enableSwiper = NO;
         
@@ -713,9 +713,33 @@ const NSString *cellID = @"cell";
  
     [KVNProgress show];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [KVNProgress showErrorWithParameters:@{KVNProgressViewParameterStatus:@"网络连接失败"}];
+     //  [KVNProgress showErrorWithParameters:@{KVNProgressViewParameterStatus:@"网络连接失败"}];
     });
+    
+  //  [KVNProgress updateProgress:0 animated:YES];
+    
+   // [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updatePro:) userInfo:self repeats:YES];
 }
+-(void)updatePro:(NSTimer *)timer
+{
+    static float pro ;
+    
+    
+    [KVNProgress updateProgress:pro animated:YES];
+     
+    [KVNProgress updateStatus:[NSString stringWithFormat:@"%d %% ",(int)(pro * 100)]];
+
+    if (pro < 1) {
+        pro += 0.01;
+    }else
+    {
+        pro = 0 ;
+    }
+    
+    
+}
+
+
 
 
 
