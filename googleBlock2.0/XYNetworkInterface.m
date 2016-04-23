@@ -482,7 +482,6 @@ uploadTask = [manager
         if (dict[@"status"]) {
             NSLog(@"文件下载成功");
             NSDictionary *strdata = dict[@"obj"];
-            
             NSLog(@"file data ---%@",strdata[@"content"]);
             
             [strdata[@"content"] writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];

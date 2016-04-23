@@ -28,7 +28,7 @@
 /**
  *  蓝牙自动扫描 自动连接
  *
- *  @param interval 一次扫描时间尝试连接
+ *  @param interval 每次扫描时间
  *  @param timeOut  总超时 时间
  *  @param distance 自动连接的距离(信号强度 1米以内 信号强度和距离成正比)
  */
@@ -77,15 +77,16 @@
  */
 -(void)writeData:(NSData *)data;
 /*
- *  蓝牙接受数据的回调
+ *  蓝牙接受 数据发送状态的回调
  *  @param updateValue 接收到数据的回调
  */
 -(void)writeDataWithResponse:(NSData *)data response:(void(^)(BOOL success))response;
 
-
+/*
+ * 查找设备时 改变设备
+ * @param 改变时的回调 返回所用设备列表
+ */
 -(void)peripheralValueChangle:(void(^)(CBPeripheral *peripheral , NSData *data))updateValue;
-
-
 
 //-(void)sendData:(NSData *)data;
 

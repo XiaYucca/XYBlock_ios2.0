@@ -85,8 +85,8 @@
 		C1405C471C96A345006FE66D /* ExampleUIWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleUIWebViewController.h; sourceTree = "<group>"; };
 		C1405C481C96A345006FE66D /* ExampleUIWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleUIWebViewController.m; sourceTree = "<group>"; };
 		C1405C4A1C96AC78006FE66D /* ExampleApp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ExampleApp.html; sourceTree = "<group>"; };
-		C144174C1CC636B8000C3183 /* NSData+SubData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SubData.h"; sourceTree = "<group>"; };
-		C144174D1CC636B8000C3183 /* NSData+SubData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SubData.m"; sourceTree = "<group>"; };
+		C144174C1CC636B8000C3183 /* NSData+SubData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+SubData.h"; path = "googleBlock2.0/NSData+SubData.h"; sourceTree = "<group>"; };
+		C144174D1CC636B8000C3183 /* NSData+SubData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+SubData.m"; path = "googleBlock2.0/NSData+SubData.m"; sourceTree = "<group>"; };
 		C14571DF1CB5FEEE004256F0 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		C14571E01CB5FEEE004256F0 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		C14571E31CB603E9004256F0 /* googleBlock2.0.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = googleBlock2.0.pch; sourceTree = "<group>"; };
@@ -115,8 +115,8 @@
 		C16033D81CACECFE00D6BA9B /* XYSwiperCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYSwiperCell.xib; sourceTree = "<group>"; };
 		C16162B81CBF3C420045B1D5 /* DownImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownImageViewController.h; sourceTree = "<group>"; };
 		C16162B91CBF3C420045B1D5 /* DownImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownImageViewController.m; sourceTree = "<group>"; };
-		C16162BB1CBFA2DE0045B1D5 /* NSString+FindString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FindString.h"; sourceTree = "<group>"; };
-		C16162BC1CBFA2DE0045B1D5 /* NSString+FindString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FindString.m"; sourceTree = "<group>"; };
+		C16162BB1CBFA2DE0045B1D5 /* NSString+FindString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FindString.h"; path = "googleBlock2.0/NSString+FindString.h"; sourceTree = "<group>"; };
+		C16162BC1CBFA2DE0045B1D5 /* NSString+FindString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FindString.m"; path = "googleBlock2.0/NSString+FindString.m"; sourceTree = "<group>"; };
 		C18E0E821C7AFD440097A842 /* googleBlock2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = googleBlock2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18E0E861C7AFD440097A842 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C18E0E881C7AFD440097A842 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -137,10 +137,10 @@
 		C19A1B9E1CAA89C3006CD176 /* FileOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileOptions.m; sourceTree = "<group>"; };
 		C1B1A4351CAD310000BE4023 /* KVNProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgress.h; sourceTree = "<group>"; };
 		C1B1A4361CAD310000BE4023 /* KVNProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVNProgress.m; sourceTree = "<group>"; };
-		C1B1A4391CAD314600BE4023 /* UIImage+KVNEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KVNEmpty.h"; sourceTree = "<group>"; };
-		C1B1A43A1CAD314600BE4023 /* UIImage+KVNEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KVNEmpty.m"; sourceTree = "<group>"; };
-		C1B1A43B1CAD314600BE4023 /* UIImage+KVNImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KVNImageEffects.h"; sourceTree = "<group>"; };
-		C1B1A43C1CAD314600BE4023 /* UIImage+KVNImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KVNImageEffects.m"; sourceTree = "<group>"; };
+		C1B1A4391CAD314600BE4023 /* UIImage+KVNEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+KVNEmpty.h"; path = "googleBlock2.0/Categories/UIImage+KVNEmpty.h"; sourceTree = "<group>"; };
+		C1B1A43A1CAD314600BE4023 /* UIImage+KVNEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+KVNEmpty.m"; path = "googleBlock2.0/Categories/UIImage+KVNEmpty.m"; sourceTree = "<group>"; };
+		C1B1A43B1CAD314600BE4023 /* UIImage+KVNImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+KVNImageEffects.h"; path = "googleBlock2.0/Categories/UIImage+KVNImageEffects.h"; sourceTree = "<group>"; };
+		C1B1A43C1CAD314600BE4023 /* UIImage+KVNImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+KVNImageEffects.m"; path = "googleBlock2.0/Categories/UIImage+KVNImageEffects.m"; sourceTree = "<group>"; };
 		C1B1A43F1CAD316D00BE4023 /* KVNProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KVNProgressView.xib; sourceTree = "<group>"; };
 		C1B1A4421CAE10B700BE4023 /* SetMask.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetMask.xib; sourceTree = "<group>"; };
 		C1B1A4431CAE10B700BE4023 /* SetMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetMaskView.h; sourceTree = "<group>"; };
@@ -268,10 +268,6 @@
 				C10570E51CAB7FC600A37C0B /* MCSwipeTableViewCell.h */,
 				C10570E61CAB7FC600A37C0B /* MCSwipeTableViewCell.m */,
 				C16162B81CBF3C420045B1D5 /* DownImageViewController.h */,
-				C16162BB1CBFA2DE0045B1D5 /* NSString+FindString.h */,
-				C144174C1CC636B8000C3183 /* NSData+SubData.h */,
-				C144174D1CC636B8000C3183 /* NSData+SubData.m */,
-				C16162BC1CBFA2DE0045B1D5 /* NSString+FindString.m */,
 				C16162B91CBF3C420045B1D5 /* DownImageViewController.m */,
 			);
 			name = TestviewController;
@@ -300,8 +296,8 @@
 		C18E0E841C7AFD440097A842 /* googleBlock2.0 */ = {
 			isa = PBXGroup;
 			children = (
-				C1B1A4471CAE154C00BE4023 /* HTMLSource */,
 				C1405C441C9661B5006FE66D /* FrameWorks */,
+				C1B1A4471CAE154C00BE4023 /* HTMLSource */,
 				C1B1A44B1CAE160000BE4023 /* MyLib */,
 				C16033DB1CACED0C00D6BA9B /* MainViewController */,
 				C16033DC1CACED5100D6BA9B /* MinorViewController */,
@@ -345,10 +341,6 @@
 			isa = PBXGroup;
 			children = (
 				C1B1A43F1CAD316D00BE4023 /* KVNProgressView.xib */,
-				C1B1A4391CAD314600BE4023 /* UIImage+KVNEmpty.h */,
-				C1B1A43A1CAD314600BE4023 /* UIImage+KVNEmpty.m */,
-				C1B1A43B1CAD314600BE4023 /* UIImage+KVNImageEffects.h */,
-				C1B1A43C1CAD314600BE4023 /* UIImage+KVNImageEffects.m */,
 				C14827431CC9BC3400E53C5E /* KVNViewController.h */,
 			);
 			path = Categories;
@@ -377,16 +369,13 @@
 		C1B1A44B1CAE160000BE4023 /* MyLib */ = {
 			isa = PBXGroup;
 			children = (
+				C1B2CC501CCB475700F4F1CC /* BlueTooth */,
+				C1B2CC4F1CCB471D00F4F1CC /* Category */,
 				C147B6921CC8BA390000A99E /* ProgressView */,
 				C14571DF1CB5FEEE004256F0 /* Device.h */,
 				C14571E01CB5FEEE004256F0 /* Device.m */,
-				C14E6DA61C883FE80081F523 /* XYNetworkInterface.h */,
-				C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */,
+				C1B2CC511CCB477500F4F1CC /* NetWork */,
 				C1B1A4411CAD317500BE4023 /* HUD */,
-				C1B1A4481CAE15F200BE4023 /* SerialGATT.h */,
-				C1B1A4491CAE15F200BE4023 /* SerialGATT.m */,
-				C1B1A44E1CAE1B4A00BE4023 /* XYSerialManage.h */,
-				C1B1A44F1CAE1B4A00BE4023 /* XYSerialManage.m */,
 			);
 			name = MyLib;
 			path = ..;
@@ -402,6 +391,65 @@
 				C18E0E8E1C7AFD440097A842 /* Main.storyboard */,
 			);
 			name = Others;
+			sourceTree = "<group>";
+		};
+		C1B2CC4F1CCB471D00F4F1CC /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				C1B2CC541CCB486700F4F1CC /* UIImage */,
+				C1B2CC531CCB485A00F4F1CC /* NSData */,
+				C1B2CC521CCB483B00F4F1CC /* NSString */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		C1B2CC501CCB475700F4F1CC /* BlueTooth */ = {
+			isa = PBXGroup;
+			children = (
+				C1B1A4481CAE15F200BE4023 /* SerialGATT.h */,
+				C1B1A4491CAE15F200BE4023 /* SerialGATT.m */,
+				C1B1A44E1CAE1B4A00BE4023 /* XYSerialManage.h */,
+				C1B1A44F1CAE1B4A00BE4023 /* XYSerialManage.m */,
+			);
+			name = BlueTooth;
+			sourceTree = "<group>";
+		};
+		C1B2CC511CCB477500F4F1CC /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				C14E6DA61C883FE80081F523 /* XYNetworkInterface.h */,
+				C14E6DA71C883FE80081F523 /* XYNetworkInterface.m */,
+			);
+			name = NetWork;
+			sourceTree = "<group>";
+		};
+		C1B2CC521CCB483B00F4F1CC /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				C16162BB1CBFA2DE0045B1D5 /* NSString+FindString.h */,
+				C16162BC1CBFA2DE0045B1D5 /* NSString+FindString.m */,
+			);
+			name = NSString;
+			sourceTree = "<group>";
+		};
+		C1B2CC531CCB485A00F4F1CC /* NSData */ = {
+			isa = PBXGroup;
+			children = (
+				C144174C1CC636B8000C3183 /* NSData+SubData.h */,
+				C144174D1CC636B8000C3183 /* NSData+SubData.m */,
+			);
+			name = NSData;
+			sourceTree = "<group>";
+		};
+		C1B2CC541CCB486700F4F1CC /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				C1B1A4391CAD314600BE4023 /* UIImage+KVNEmpty.h */,
+				C1B1A43A1CAD314600BE4023 /* UIImage+KVNEmpty.m */,
+				C1B1A43B1CAD314600BE4023 /* UIImage+KVNImageEffects.h */,
+				C1B1A43C1CAD314600BE4023 /* UIImage+KVNImageEffects.m */,
+			);
+			name = UIImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
