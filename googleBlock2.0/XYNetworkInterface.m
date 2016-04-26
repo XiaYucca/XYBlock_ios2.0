@@ -63,7 +63,7 @@ static id sessionManager;
     NSString *identifierForVendor = [[UIDevice currentDevice].identifierForVendor UUIDString];
 //  NSString *identifierForAdvertising = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
 //  NSLog(@"UUID---:%@",identifierForVendor);
-    [NSURL URLWithString:baseUrlString];
+//  [NSURL URLWithString:baseUrlString];
     return identifierForVendor;
 }
 

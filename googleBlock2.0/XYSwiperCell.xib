@@ -27,7 +27,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.99919462199999998" green="0.29005613889999998" blue="0.21478456670000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.33453737210000001" green="0.79959601020000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <view tag="100" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="huC-dj-Fx5" userLabel="behandView">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>

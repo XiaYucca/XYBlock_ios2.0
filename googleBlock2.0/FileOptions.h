@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface FileOptions : NSObject
+
 @property (nonatomic,copy)NSString *filedata;
+
 -(void)deleteFiles:(NSString *)fileName WithCompliment:(void (^)(bool successed))compliment;
+-(void)saveFilesWithData:(NSString *)strData fileName:(NSString *)fileName WithCompliment:(void (^)(bool successed))compliment;
 
 @end

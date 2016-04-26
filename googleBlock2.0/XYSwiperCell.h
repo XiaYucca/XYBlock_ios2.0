@@ -1,9 +1,9 @@
 //
-//  XYSwiperCell.h
-//  EditAndAllChooseCell
+//  setMaskView.m
+//  XYCoreBlueToothDemo
 //
-//  Created by RainPoll on 16/3/30.
-//  Copyright © 2016年 ningBo Jiang. All rights reserved.
+//  Created by RainPoll on 16/1/16.
+//  Copyright © 2016年 RainPoll. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

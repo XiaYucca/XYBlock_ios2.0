@@ -67,6 +67,7 @@
 -(XYSerialManage *)xySerialManage
 {
     if (!_xySerialManage) {
+        
         _xySerialManage = [[XYSerialManage alloc]init];
         
         [_xySerialManage changleDiscoverPeripheral:^(NSArray *peripherals) {
@@ -233,6 +234,29 @@
     }
 }
 
+
+-(void)saveFilesWithData:(NSString *)strData fileName:(NSString *)fileName WithCompliment:(void (^)(bool successed))compliment
+
+{
+    NSString *path = [self pathForDocument];
+    path = [NSString stringWithFormat:@"%@/%@",path,fileName];
+    
+    NSLog(@"savePath%@",path);
+    
+       NSError *err;
+    [strData writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&err];
+    
+    if (err) {
+        NSLog(@"添加文件失败%@",err);
+        !compliment?: compliment(NO);
+    }
+    else{
+        !compliment?: compliment(YES);
+        NSLog(@"添加文件成功");
+        
+    }
+
+}
 
 //-(void)loadSetView
 //{

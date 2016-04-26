@@ -1,9 +1,9 @@
 //
-//  XYSwiperCell.m
-//  EditAndAllChooseCell
+//  setMaskView.m
+//  XYCoreBlueToothDemo
 //
-//  Created by RainPoll on 16/3/30.
-//  Copyright © 2016年 ningBo Jiang. All rights reserved.
+//  Created by RainPoll on 16/1/16.
+//  Copyright © 2016年 RainPoll. All rights reserved.
 //
 
 #define overAnimation 0.5
@@ -42,7 +42,7 @@
 }
 
 -(void)awakeFromNib {
-    NSLog(@"kaishi jiazia nib ++++++++++++\n");
+    NSLog(@"开始加载  nib ++++++++++++\n");
     [self loadGesture];
 }
 
