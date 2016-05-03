@@ -36,12 +36,19 @@ var xmlTemp = "";
       
       var btn_save = document.getElementById('btn_save');
       
-   
+      btn_save.innerHTML = 'saveClick';
           
-       btn_save.innerHTML = 'saveClick';
-          
-          window.location.href = xmlTemp; //arduinoTextarea.value;
+       window.location.href = xmlTemp; //arduinoTextarea.value;
   }
+  
+  
+  function reSetCode()
+  {
+      tabClick('xml');
+      xmlTemp = "<xml xmlns=\"http://www.w3.org/1999/xhtml\">";
+      tabClick('blocks');
+  }
+  
   
 function tabClick(clickedName) {
   // If the XML tab was open, save and render the content.
@@ -266,7 +273,6 @@ function init() {
                                      
                                   //   btn_open.innerHTML = 'openClick';
                  
-                                     
                                      bridge.callHandler('testObjcCallback', {'data':'','fileCMD': 'openFile'}, function(response)  {
                                                          tabClick('blocks');
                                                         })
@@ -409,8 +415,8 @@ function init() {
             <td id="tab_xml" class="taboff" style="padding:0;"></td>
             <td class="tabmax"></td>
             <td id="btn_open" class="tdBtn btn1" ><p>打开</p><input type="file" id="load" style="display: none;"/></td>
-            <td class="tdBtn btn2" onclick="resetClick()"><p>重置</p></td>
-            <td id="btn_compile" class="tdBtn btn3" onclick="complieClick()"><p>编译</p></td>
+            <td id= "btn_reset" class="tdBtn btn2" onclick="reSetCode()"><p>重置</p></td>
+            <td id="btn_compile" class="tdBtn btn3"><p>编译</p></td>
             <td id="btn_save" class="tdBtn btn4" ><p>保存</p></td>
           </tr>
         </table>
